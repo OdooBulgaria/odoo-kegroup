@@ -325,6 +325,8 @@
                     <filter name="draft" string="Draft" domain="[('state','=','draft')]" help="Draft Invoices"/>
                     <separator/>
                     <field name="owner_id" operator="child_of"/>
+                    <field name="beneficiary" operator="child_of"/>
+                    <field name="partowner_ids" operator="child_of"/>
                     <field name="comment" operator="ilike"/>
                     <separator/>
                     <group expand="0" string="Group By">
