@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="report_partnerblock_document">
+    <t t-if="block_available(o) == True">
+    <t t-call="share_register.partner_external_layout">
+         <div class="page">
+            <table style="width:100%;" >
+                <tbody>
+                    <tr t-foreach="get_company(o)" t-as="c" style="padding-bottom:20px !important; margin:5px 5px 5px 0px" >
+                        <td >
+                            <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:30px; " >
+                                <tr style="margin-bottom:20px !important;">
+                                    <th style="min-width:130px;max-width:130px;">Company: <span t-esc="c.name"/></th>
+                                    <th class="text-center">Purchased Date</th>
+                                    <th class="text-center">Number of Shares</th>
+                                    <th class="text-center">Nominal Value</th>
+                                    <th class="text-center">Purchase Price</th>
+                                    <th class="text-center">Ownership %</th>
+                                    <th class="text-center">Block Name</th>
+                                </tr>
+
+                                <tr t-foreach="get_block(c,o)" t-as="b" >
+                                    <td></td>
+                                    <td class="text-center">
+                                        <span t-field="b.date_purchased" /> 
+                                    </td>
+
+                                    <td class="text-center">
+                                        <span t-field="b.number_of_shares"/>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <span t-field="b.nominal_value"
+                                              t-field-options='{"widget": "monetary", "display_currency": "b.company_id.currency_id"}'/>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <span t-field="b.purchase_price"
+                                              t-field-options='{"widget": "monetary", "display_currency": "b.company_id.currency_id"}'/>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <span t-esc="float(b.number_of_shares) / float(b.company_id.share_total or 1)*100"/><span>%</span>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <span t-field="b.name" />
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom:2px solid black;">
+                                    <td class="text-left"><b>Owners Total:</b></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.number_of_shares), get_block(c,o)))"/></b></td>
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.nominal_value), get_block(c,o)))" /></b></td>
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.purchase_price), get_block(c,o)))"/></b></td>
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: float(a.number_of_shares) / float(a.company_id.share_total or 1)*100, get_block(c,o)))"/><span>%</span></b></td>
+                                    <td class="text-center"></td>
+                                </tr>
+
+                                <tr style="border-bottom:2px solid black;" >
+                                    <td class="text-left"><b>Company Total:</b></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.company_id.share_total), get_block(c,o)))"/></b></td>
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.company_id.share_capital), get_block(c,o)))"/></b></td>
+                                    <td class="text-center"><b>??</b></td>
+                                    <td class="text-center"><b>??</b></td>
+                                    <td class="text-center"><b>??</b></td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </t>
+    </t>
+</template>
+
+<template id="report_partnerblock">
+            <t t-call="report.html_container">
+                <t t-foreach="doc_ids" t-as="doc_id" >
+                    
+                    <t t-raw="translate_doc(doc_id, doc_model, 'lang', 'share_register.report_partnerblock_document')" />
+                </t>
+            </t>
+        </template>
+</data>
+</openerp>

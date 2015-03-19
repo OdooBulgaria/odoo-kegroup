@@ -1,0 +1,702 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* share_register
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-83bd9ee\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-21 10:29+0000\n"
+"PO-Revision-Date: 2014-11-21 10:29+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: share_register
+#: help:share.block,certificate_issued:0
+msgid " * Checked if there has been a physical Share Certificate Issued for the Shares in the interval."
+msgstr ""
+
+#. module: share_register
+#: help:share.share,share_emption:0
+msgid " * Emption is a limitation when a share is sold. \n"
+"\n"
+"                             * It needs to be offered to previous owners before a new owner can be accepted."
+msgstr ""
+
+#. module: share_register
+#: help:share.share,share_stakeholder:0
+msgid " * People who shoule be informed about events around this share. "
+msgstr ""
+
+#. module: share_register
+#: help:share.share,share_class:0
+msgid " * Share classes defines the nominal value"
+msgstr ""
+
+#. module: share_register
+#: help:share.block,state:0
+#: help:share.share,state:0
+msgid " * The 'Draft' status is used when a user is encoding a new and unconfirmed Invoice.\n"
+" * The 'Open' status is used when user create invoice,a invoice number is generated.Its in open status till user does not pay invoice.\n"
+" * The 'Cancelled' status is used when user cancel invoice."
+msgstr ""
+
+#. module: share_register
+#: help:share.share,share_beneficiary:0
+msgid " * The benficiary is the real person behind an owner."
+msgstr ""
+
+#. module: share_register
+#: model:ir.actions.act_window,help:share_register.action_share_block_tree
+#: model:ir.actions.act_window,help:share_register.action_share_tree
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to record a new share.\n"
+"              </p><p>\n"
+"                You can control the shares ...\n"
+"              </p>\n"
+"            "
+msgstr ""
+
+#. module: share_register
+#: view:res.partner:share_register.view_partner_inherit_form
+msgid "Accounting"
+msgstr ""
+
+#. module: share_register
+#: field:share.block,comment:0
+#: field:share.share,comment:0
+msgid "Additional Information"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_block_document
+msgid "Address"
+msgstr ""
+
+#. module: share_register
+#: help:res.company,share_capital_amount:0
+msgid "Amount of share capital."
+msgstr ""
+
+#. module: share_register
+#: field:res.company,authorised_share_capital:0
+msgid "Authorised share capital"
+msgstr ""
+
+#. module: share_register
+#: field:company.share.setting,view_beneficiary:0
+#: field:share.block,beneficiary:0
+#: field:share.share,share_beneficiary:0
+#: view:website:share_register.report_block_document
+msgid "Beneficiary"
+msgstr ""
+
+#. module: share_register
+#: field:res.partner,birth_date:0
+msgid "Birth Date"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,block_id:0
+#: view:share.block:share_register.share_block_form
+#: view:share.block:share_register.share_block_tree
+#: view:share.share:share_register.view_share_filter
+#: field:share.share,block_id:0
+msgid "Block"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_partnerblock_document
+msgid "Block Name"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_block_document
+msgid "Block No"
+msgstr ""
+
+#. module: share_register
+#: field:share.block,name:0
+msgid "Block No."
+msgstr ""
+
+#. module: share_register
+#: model:ir.model,name:share_register.model_share_block
+msgid "Block of shares"
+msgstr ""
+
+#. module: share_register
+#: model:ir.actions.act_window,name:share_register.action_share_block_tree
+#: model:ir.ui.menu,name:share_register.menu_action_share_block_tree
+#: view:res.partner:share_register.view_partner_inherit_form
+#: field:res.partner,block_ids:0
+msgid "Blocks"
+msgstr ""
+
+#. module: share_register
+#: selection:share.block,state:0
+#: selection:share.share,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: share_register
+#: field:share.block,certificate_issued:0
+msgid "Certificate Issed"
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.share_block_form
+#: view:share.share:share_register.share_form
+msgid "Comments"
+msgstr ""
+
+#. module: share_register
+#: model:ir.model,name:share_register.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: share_register
+#: field:share.block,company_id:0
+#: field:share.share,company_id:0
+msgid "Company"
+msgstr ""
+
+#. module: share_register
+#: model:ir.actions.report.xml,name:share_register.share_blocks
+msgid "Company Block Report"
+msgstr ""
+
+#. module: share_register
+#: view:company.share.setting:share_register.company_share_setting_form
+msgid "Company Share Setting Form"
+msgstr ""
+
+#. module: share_register
+#: model:ir.actions.act_window,name:share_register.action_company_share_setting_tree
+#: model:ir.ui.menu,name:share_register.menu_action_company_share_setting_tree
+msgid "Company Share Settings"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_partnerblock_document
+msgid "Company Total:"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_partnerblock_document
+msgid "Company:"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,create_uid:0
+#: field:company.share.setting,create_uid:0
+#: field:share.block,create_uid:0
+#: field:share.partowner,create_uid:0
+#: field:share.share,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,create_date:0
+#: field:company.share.setting,create_date:0
+#: field:share.block,create_date:0
+#: field:share.partowner,create_date:0
+#: field:share.share,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: share_register
+#: field:share.share,currency_id:0
+msgid "Currency"
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.view_share_block_filter
+#: view:share.share:share_register.view_share_filter
+msgid "Date"
+msgstr ""
+
+#. module: share_register
+#: field:share.block,date_issued:0
+#: field:share.share,date_issued:0
+msgid "Date Issued"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_block_document
+msgid "Date of Birth"
+msgstr ""
+
+#. module: share_register
+#: help:block.partowner,message_last_post:0
+#: help:share.block,message_last_post:0
+#: help:share.partowner,message_last_post:0
+#: help:share.share,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.partner_external_layout_header
+msgid "Date:"
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.view_share_block_filter
+#: selection:share.block,state:0
+#: view:share.share:share_register.view_share_filter
+#: selection:share.share,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.view_share_block_filter
+#: view:share.share:share_register.view_share_filter
+msgid "Draft Invoices"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_block_document
+msgid "Email"
+msgstr ""
+
+#. module: share_register
+#: field:share.block,emption:0
+#: field:share.share,share_emption:0
+msgid "Emption"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,message_follower_ids:0
+#: field:share.block,message_follower_ids:0
+#: field:share.partowner,message_follower_ids:0
+#: field:share.share,message_follower_ids:0
+msgid "Followers"
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.view_share_block_filter
+#: view:share.share:share_register.view_share_filter
+msgid "Group By"
+msgstr ""
+
+#. module: share_register
+#: help:block.partowner,message_summary:0
+#: help:share.block,message_summary:0
+#: help:share.partowner,message_summary:0
+#: help:share.share,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,id:0
+#: field:company.share.setting,id:0
+#: field:report.share_register.report_block,id:0
+#: field:report.share_register.report_partnerblock,id:0
+#: field:share.block,id:0
+#: field:share.partowner,id:0
+#: field:share.share,id:0
+msgid "ID"
+msgstr ""
+
+#. module: share_register
+#: help:block.partowner,message_unread:0
+#: help:share.block,message_unread:0
+#: help:share.partowner,message_unread:0
+#: help:share.share,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: share_register
+#: view:share.share:share_register.share_form
+msgid "Invoice"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,message_is_follower:0
+#: field:share.block,message_is_follower:0
+#: field:share.partowner,message_is_follower:0
+#: field:share.share,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: share_register
+#: help:share.block,date_issued:0
+#: help:share.share,date_issued:0
+msgid "Keep empty to use the current date"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,message_last_post:0
+#: field:share.block,message_last_post:0
+#: field:share.partowner,message_last_post:0
+#: field:share.share,message_last_post:0
+msgid "Last Message Date"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,write_uid:0
+#: field:company.share.setting,write_uid:0
+#: field:share.block,write_uid:0
+#: field:share.partowner,write_uid:0
+#: field:share.share,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,write_date:0
+#: field:company.share.setting,write_date:0
+#: field:share.block,write_date:0
+#: field:share.partowner,write_date:0
+#: field:share.share,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,message_ids:0
+#: field:share.block,message_ids:0
+#: field:share.partowner,message_ids:0
+#: field:share.share,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: share_register
+#: help:block.partowner,message_ids:0
+#: help:share.block,message_ids:0
+#: help:share.partowner,message_ids:0
+#: help:share.share,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_block_document
+msgid "Name"
+msgstr ""
+
+#. module: share_register
+#: field:share.block,number_of_shares:0
+msgid "No. of Shares"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_partnerblock_document
+msgid "Nominal Value"
+msgstr ""
+
+#. module: share_register
+#: field:res.company,nominal_value:0
+#: field:share.block,nominal_value:0
+#: field:share.share,nominal_value:0
+msgid "Nominal value"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_block_document
+#: view:website:share_register.report_partnerblock_document
+msgid "Number of Shares"
+msgstr ""
+
+#. module: share_register
+#: help:res.company,shareholders:0
+msgid "Number of real shareholders in the system."
+msgstr ""
+
+#. module: share_register
+#: help:res.company,share_amount:0
+#: help:res.company,share_blocks_amount:0
+msgid "Number of real shares in the system."
+msgstr ""
+
+#. module: share_register
+#: field:res.company,share_amount:0
+#: field:res.company,share_blocks_amount:0
+msgid "Number of registered shares"
+msgstr ""
+
+#. module: share_register
+#: field:res.company,shareholders:0
+msgid "Number of shareholders"
+msgstr ""
+
+#. module: share_register
+#: help:res.company,share_capital:0
+#: field:res.company,share_total:0
+#: help:res.company,share_total:0
+msgid "Number of shares"
+msgstr ""
+
+#. module: share_register
+#: selection:share.block,state:0
+#: selection:share.share,state:0
+msgid "Open"
+msgstr ""
+
+#. module: share_register
+#: selection:share.block,share_class:0
+#: selection:share.share,share_class:0
+msgid "Ordinary"
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.view_share_block_filter
+#: field:share.block,owner_id:0
+#: view:share.share:share_register.view_share_filter
+#: field:share.share,owner_id:0
+msgid "Owner"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,partowner_percent:0
+#: field:share.partowner,partowner_percent:0
+msgid "Owner percent"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.partner_external_layout_header
+msgid "Owner:"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_block_document
+msgid "Owners"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_partnerblock_document
+msgid "Owners Total:"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_block_document
+#: view:website:share_register.report_partnerblock_document
+msgid "Ownership %"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,partowner_id:0
+#: field:share.partowner,partowner_id:0
+msgid "Part Owner"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,name:0
+#: field:share.partowner,name:0
+msgid "Part Owner No."
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.share_block_form
+#: field:share.block,partowner_ids:0
+#: view:share.share:share_register.share_form
+msgid "Part Owners"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_block_document
+msgid "Part owner"
+msgstr ""
+
+#. module: share_register
+#: field:share.block,block_partowner:0
+msgid "PartOwner"
+msgstr ""
+
+#. module: share_register
+#: model:ir.model,name:share_register.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: share_register
+#: model:ir.actions.report.xml,name:share_register.share_partnerblocks
+msgid "Partner Block Report"
+msgstr ""
+
+#. module: share_register
+#: field:company.share.setting,view_partowner:0
+msgid "Partowner"
+msgstr ""
+
+#. module: share_register
+#: field:share.share,partowner_ids:0
+msgid "Partowners"
+msgstr ""
+
+#. module: share_register
+#: model:ir.model,name:share_register.model_block_partowner
+#: model:ir.model,name:share_register.model_share_partowner
+msgid "Partowners of shares"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_block_document
+msgid "Phone"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_partnerblock_document
+msgid "Purchase Price"
+msgstr ""
+
+#. module: share_register
+#: field:share.block,purchase_price:0
+#: field:share.share,purchase_price:0
+msgid "Purchase price"
+msgstr ""
+
+#. module: share_register
+#: field:share.block,date_purchased:0
+#: view:website:share_register.report_partnerblock_document
+msgid "Purchased Date"
+msgstr ""
+
+#. module: share_register
+#: selection:share.block,share_class:0
+#: selection:share.share,share_class:0
+msgid "Redemption"
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.view_share_block_filter
+#: view:share.share:share_register.view_share_filter
+msgid "Search Share"
+msgstr ""
+
+#. module: share_register
+#: view:share.share:share_register.view_share_filter
+#: field:share.share,seller_id:0
+msgid "Seller"
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.share_block_form
+#: view:share.share:share_register.share_form
+msgid "Send by Email"
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.view_share_block_filter
+#: field:share.partowner,share_id:0
+#: view:share.share:share_register.share_form
+#: view:share.share:share_register.share_tree
+#: view:share.share:share_register.view_share_filter
+msgid "Share"
+msgstr ""
+
+#. module: share_register
+#: field:res.company,share_capital:0
+msgid "Share Capital"
+msgstr ""
+
+#. module: share_register
+#: model:ir.model,name:share_register.model_share_share
+msgid "Share Certificate"
+msgstr ""
+
+#. module: share_register
+#: field:share.block,share_class:0
+#: field:share.share,share_class:0
+msgid "Share Class"
+msgstr ""
+
+#. module: share_register
+#: field:share.share,name:0
+msgid "Share No."
+msgstr ""
+
+#. module: share_register
+#: field:share.block,block_share_numbers:0
+msgid "Share No. Interval"
+msgstr ""
+
+#. module: share_register
+#: view:company.share.setting:share_register.company_share_setting_form
+#: view:company.share.setting:share_register.company_share_setting_tree
+msgid "Share Settings"
+msgstr ""
+
+#. module: share_register
+#: field:res.company,share_capital_amount:0
+msgid "Share capital (amount)"
+msgstr ""
+
+#. module: share_register
+#: model:ir.actions.act_window,name:share_register.action_share_tree
+#: model:ir.ui.menu,name:share_register.menu_action_share_tree
+#: view:res.partner:share_register.view_partner_inherit_form
+#: field:res.partner,share_ids:0
+#: view:share.block:share_register.share_block_form
+#: field:share.block,share_ids:0
+msgid "Shares"
+msgstr ""
+
+#. module: share_register
+#: field:company.share.setting,view_stakeholder:0
+#: field:share.block,stakeholder:0
+#: field:share.share,share_stakeholder:0
+#: view:website:share_register.report_block_document
+msgid "Stakeholder"
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.share_block_form
+#: view:share.share:share_register.share_form
+msgid "Stakeholders"
+msgstr ""
+
+#. module: share_register
+#: view:share.block:share_register.view_share_block_filter
+#: field:share.block,state:0
+#: view:share.share:share_register.view_share_filter
+#: field:share.share,state:0
+msgid "Status"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,message_summary:0
+#: field:share.block,message_summary:0
+#: field:share.partowner,message_summary:0
+#: field:share.share,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.report_block_document
+msgid "Total:"
+msgstr ""
+
+#. module: share_register
+#: field:block.partowner,message_unread:0
+#: field:share.block,message_unread:0
+#: field:share.partowner,message_unread:0
+#: field:share.share,message_unread:0
+msgid "Unread Messages"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.partner_layout
+msgid "data_report_dpi if data_report_dpi else None"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.partner_layout
+msgid "data_report_header_spacing if data_report_header_spacing else None"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.partner_layout
+msgid "data_report_margin_top if data_report_margin_top else None"
+msgstr ""
+
+#. module: share_register
+#: view:website:share_register.partner_layout
+msgid "share_register.partner_layout"
+msgstr ""
+
+#. module: share_register
+#: field:res.partner,self:0
+msgid "unknown"
+msgstr ""
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data >
+
+<!-- Product Inquiry -->
+
+        <record id="group_product_inquiry" model="res.groups">
+            <field name="name">Product Inquiry</field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_share_share_user,share.share.user,model_share_share,base.group_user,1,1,1,1
+access_block_partowner_user,block.partowner.user,model_block_partowner,base.group_user,1,1,1,1
+access_share_block_user,share.block.user,model_share_block,base.group_user,1,1,1,1
+access_share_partowner_user,share.partowner.user,model_share_partowner,base.group_user,1,1,1,1
