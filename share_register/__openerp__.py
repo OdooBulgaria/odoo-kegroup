@@ -46,6 +46,7 @@ KE-Group
         'views/report_partnerblock.xml',
         'security/ir.model.access.csv',
         'security/share_register.xml',
+        'report/company_blocks.xml',
         ],
     'installable': True,
     'application': True,

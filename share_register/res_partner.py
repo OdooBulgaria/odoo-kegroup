@@ -18,10 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import osv, fields
+
+import itertools
+from lxml import etree
+
+from openerp import models, fields, api, _
+from openerp.exceptions import except_orm, Warning, RedirectWarning
+
+import openerp.addons.decimal_precision as dp
 
 
-class res_partner(osv.Model):
+class res_partner(models.Model):
     _name = 'res.partner'
     _inherit = ['res.partner']
 
@@ -62,3 +69,40 @@ class res_partner(osv.Model):
         elif address.parent_id:
             address_format = '%(company_name)s\n' + address_format
         return address_format % args
+        
+
+    def _share(self, cr, uid, ids, name, args, context=None):
+        res = {}
+        for partner in self.browse(cr, uid, ids, context=context):
+#            for invoice in self.pool.get('account.invoice').browse(cr, uid, self.pool.get('account.invoice').search(cr,uid,[company_id,'=',company.id],context=context), context=context):
+#                res[company.id]['smart_cach'] =+ invoice.smart_cach,
+            res[partner.id]['share_amount'] = 0
+            res[partner.id]['share_blocks_amount'] = 0
+        return res
+
+    # share_blocks_amount = fields.function(_share, type="integer", string='Number of registered shares',help="Number of real shares in the system.",multi='all',)
+    # share_amount = fields.function(_share, type="integer", string='Number of registered shares',help="Number of real shares in the system.",multi='all',)
+
+#     def _get_ids(self, cr, uid, ids, flds, args, context=None):
+#         return {i: i for i in ids}
+#
+
+    share_ids     = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
+    block_ids     = fields.One2many('share.block', 'owner_id', string='Blocks', readonly=True)
+    #partowner_ids   = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
+    #beneficiary_ids = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
+    #stakeholder_ids = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
+    birth_date    = fields.Date(string='Birth Date')
+    name_last     = fields.Char('Last name')
+    
+    
+     # hack to allow using plain browse record in qweb views
+#     self = fields.Many2one('self', compute='_get_ids', relation=_name)
+
+#     DONOT delete the above partner_id field, otherwise reports will stop working
+
+#    partowner_ids = fields.One2many('share.partworner', 'owner_id', string='Part owners',
+#        readonly=True)
+
+# birth_date
+# commercial_partner_id

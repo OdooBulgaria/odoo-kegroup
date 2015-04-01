@@ -219,10 +219,13 @@
                             <field name="name" />
                             <field name="block_share_numbers" />                            
                             <field name="number_of_shares"/>
+                            <field name="numbers_sold"/>
+                            <field name="new_balance"/>
                             <field name="share_class" />   
                             <field name="state" />
                             <field name="certificate_issued" />
-                            <field name="emption" />   
+                            <field name="emption" /> 
+                            <field name="policy_number" />   
                         </group>
                         <group>
                             
@@ -242,26 +245,31 @@
                         </group>
                     </group>
                     <notebook colspan="4">
+<!--
                         <page string="Shares">
                             <tree>
-<!--                                
                             <field name="name" /> 
                             <field name="date_issued" />
                             <field name="share_class" />
-                            <field name="share_emption" /> -->
+                            <field name="share_emption" /> 
                             <field name="share_ids" cols="4"/>                            
                             </tree>
                         </page>
-
+-->
                         <page string="Part Owners">
                             <field name="partowner_ids">
-                                <form string="Part Owners" >
-                                <field name="partowner_id"/>
-                                <field name="partowner_percent"/>                                
-                                </form>
                                 <tree string="Part Owners" editable="bottom">
                                 <field name="partowner_id"/>
-                                <field name="partowner_percent"/>                                
+                                <field name="partowner_percent"/>
+                                <field name="purchase_date"/>
+                                <field name="purchase_price"/>                                
+                                </tree>
+                           </field>
+                        </page>
+                        <page string="Beneficiary">
+                            <field name="beneficiary">
+                                <tree string="Beneficiary" editable="bottom">
+                                    <field name="name"/>
                                 </tree>
                            </field>
                         </page>
@@ -308,7 +316,7 @@
                     <field name="date_issued" />
                     <field name="owner_id" />
                     <field name="beneficiary" />
-                    <field name="partowner_ids" />
+                    <field name="partowner_names" />
                     <field name="stakeholder" />
                     <field name="company_id" />
                 </tree>
@@ -321,14 +329,20 @@
             <field name="model">share.block</field>
             <field name="arch" type="xml">
                 <search string="Search Share">
-                    <field name="name" string="Share" filter_domain="['|','|',('name','ilike',self),  ('owner_id', 'child_of', self), ('seller_id','child_of',self)]"/>
+                    <field name="name" string="Share" filter_domain="['|','|','|','|',('name','ilike',self),  ('owner_id', 'child_of', self), ('beneficiary','child_of',self),('partowner_names','ilike',self),('company_id','child_of',self)]"/>
                     <filter name="draft" string="Draft" domain="[('state','=','draft')]" help="Draft Invoices"/>
                     <separator/>
                     <field name="owner_id" operator="child_of"/>
+                    <field name="beneficiary" operator="child_of"/>
+                    <field name="partowner_names" operator="ilike"/>
+                    <field name="company_id" operator="child_of"/>
                     <field name="comment" operator="ilike"/>
                     <separator/>
                     <group expand="0" string="Group By">
                     	<filter name="group_by_owner_id" string="Owner" context="{'group_by':'owner_id'}"/>
+                    	<filter  string="Beneficiary" context="{'group_by':'beneficiary'}"/>                                                
+            
+                    	<filter  string="Company" context="{'group_by':'company_id'}"/>                        
                         <filter string="Status" context="{'group_by':'state'}"/>
                         <separator/>
                         <filter string="Date" context="{'group_by':'date_create'}"/>
@@ -435,6 +449,10 @@
         </record>
 -->
 <!--        <menuitem action="action_partowner_tree" id="menu_action_partowner_tree" parent="base.menu_res_company_global"/>-->
+
+
+
+
 
 
 

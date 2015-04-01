@@ -27,6 +27,10 @@ from openerp.exceptions import except_orm, Warning, RedirectWarning
 
 import openerp.addons.decimal_precision as dp
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class share_share(models.Model):
     _name = "share.share"
     _inherit = ['mail.thread']
@@ -140,21 +144,12 @@ class block_partowner(models.Model):
     _description = "Partowners of shares"
     _order = "name desc, id desc"
 
-
-    block_id = fields.Many2one('share.block', string='Block', change_default=True,
-        required=True, readonly=False,
-        track_visibility='always')
-
-    name = fields.Char(string='Part Owner No.', index=True,
-        readonly=False,)
-
-    partowner_id = fields.Many2one('res.partner', string='Part Owner', change_default=True,
-        required=True, readonly=False,
-        track_visibility='always')
-
+    block_id = fields.Many2one('share.block', string='Block', change_default=True,required=True, readonly=False,track_visibility='always')
+    name = fields.Char(string='Part Owner No.', index=True,readonly=False,)
+    partowner_id = fields.Many2one('res.partner', string='Part Owner', change_default=True, required=True, readonly=False,track_visibility='always')
     partowner_percent = fields.Float('Owner percent', digits_compute=dp.get_precision('Account'))
-
-
+    purchase_price = fields.Float('Purchase price', digits_compute=dp.get_precision('Account'))    
+    purchase_date = fields.Date('Purchase Date',)    
 
 
 class share_block(models.Model):
@@ -179,6 +174,8 @@ class share_block(models.Model):
         return 0.0
 
 
+
+
     name = fields.Char(string='Block No.', index=True, readonly=True, states={'draft': [('readonly', False)]})
     comment = fields.Text('Additional Information', track_visibility='onchange')
     state = fields.Selection([
@@ -200,9 +197,16 @@ class share_block(models.Model):
 
     stakeholder = fields.Many2many('res.partner', string='Stakeholder', change_default=True, track_visibility='onchange')
 #    block_partowner = fields.Many2one('res.partner', string='PartOwner', change_default=True, )
-    block_partowner = fields.Many2many('res.partner', string='PartOwner', change_default=True, track_visibility='onchange')
+#    block_partowner = fields.Many2many('res.partner', string='PartOwner', change_default=True, track_visibility='onchange')
 
     partowner_ids = fields.One2many('block.partowner', 'block_id', string='Part Owners', track_visibility='onchange')
+    partowner_names = fields.Char('Partowners',compute='_partowner_names',store=True)
+
+    @api.depends('partowner_ids')
+    def _partowner_names(self):
+        _logger.warning("My partowner_ids %s" % self.partowner_ids)
+        self.partowner_names = ','.join([p.partowner_id.name for p in self.partowner_ids]) if self.partowner_ids else ""
+            
 
     nominal_value = fields.Float('Nominal value', digits_compute=dp.get_precision('Account'), track_visibility='onchange')
 
@@ -242,9 +246,17 @@ class share_block(models.Model):
 #    share_ids = fields.One2many('share.share', 'share_block','Shares', change_default=True,required=False, readonly=True, states={'draft': [('readonly', False)]},)
 
 
+#    canceled_date  = fields
+    transferred_date = fields.Date(string='Transferred Date')
+    numbers_sold = fields.Integer('Numbers Sold')
+    cancelled_date = fields.Date(string='Cancelled Date')
 
-
-
+    new_balance = fields.Integer('New Balance')
+    part_owner_purchase_date = fields.Date(string='Partowner Date')
+    lastname = fields.Char()
+    policy_number = fields.Char()
+    new_cert_number = fields.Char('New certificate number')
+    
 class share_partowner(models.Model):
     _name = "share.partowner"
     _inherit = ['mail.thread']
@@ -268,41 +280,7 @@ class share_partowner(models.Model):
 
 
 
-class res_partner(models.Model):
-    # Inherits partner and adds invoice information in the partner form
-    _name = 'res.partner'
-    _inherit = 'res.partner'
 
-    def _share(self, cr, uid, ids, name, args, context=None):
-        res = {}
-        for partner in self.browse(cr, uid, ids, context=context):
-#            for invoice in self.pool.get('account.invoice').browse(cr, uid, self.pool.get('account.invoice').search(cr,uid,[company_id,'=',company.id],context=context), context=context):
-#                res[company.id]['smart_cach'] =+ invoice.smart_cach,
-            res[partner.id]['share_amount'] = 0
-            res[partner.id]['share_blocks_amount'] = 0
-        return res
-
-    # share_blocks_amount = fields.function(_share, type="integer", string='Number of registered shares',help="Number of real shares in the system.",multi='all',)
-    # share_amount = fields.function(_share, type="integer", string='Number of registered shares',help="Number of real shares in the system.",multi='all',)
-
-#     def _get_ids(self, cr, uid, ids, flds, args, context=None):
-#         return {i: i for i in ids}
-#
-
-    share_ids = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
-    block_ids = fields.One2many('share.block', 'owner_id', string='Blocks',
-        readonly=True)
-    birth_date = fields.Date(string='Birth Date')
-     # hack to allow using plain browse record in qweb views
-#     self = fields.Many2one('self', compute='_get_ids', relation=_name)
-
-#     DONOT delete the above partner_id field, otherwise reports will stop working
-
-#    partowner_ids = fields.One2many('share.partworner', 'owner_id', string='Part owners',
-#        readonly=True)
-
-# birth_date
-# commercial_partner_id
 
 
 class company_share_setting(models.Model):
@@ -311,4 +289,7 @@ class company_share_setting(models.Model):
     view_beneficiary = fields.Boolean('Beneficiary',)
     view_stakeholder = fields.Boolean('Stakeholder',)
     view_partowner = fields.Boolean('Partowner',)
+    
+    
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
