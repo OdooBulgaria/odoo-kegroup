@@ -336,6 +336,7 @@
                     <field name="beneficiary" operator="child_of"/>
                     <field name="partowner_names" operator="ilike"/>
                     <field name="company_id" operator="child_of"/>
+
                     <field name="comment" operator="ilike"/>
                     <separator/>
                     <group expand="0" string="Group By">
