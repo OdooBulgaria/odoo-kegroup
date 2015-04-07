@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+
+        <report 
+            id="share_register.report_blocks_report_extended"
+            model="res.company"
+            string="Blocks Report Extendend"
+            report_type="qweb-pdf"
+            name="share_register.blocks_report_extended"
+            file="share_register.blocks_report_extended"
+            attachment_use="True"
+        />
+
+
+        <record id="share_register.report_blocks_report_extended" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="share_register.paperformat_landscape"/>
+        </record>
+
+
+<template id="share_register.blocks_report_extended">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'share_register.blocks_report_extended_document')"/>
+        </t>
+    </t>
+</template>
+
+
+
+<template id="share_register.blocks_report_extended_document" name="Blocks report extended">
+
+            <t t-call="report.external_layout"> 
+            
+            
+            
+            
+                 <div class="page">
+                      <div class="row"> 
+                          <div class="col-xs-5 col-xs-offset-7"> 
+                          <address t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+                           <span t-field="o.partner_id.vat"/> 
+                        </div> 
+                   	</div>
+ 
+
+
+            <div class="header">
+
+<!--
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <b style="font-size:large;">
+                            Owner: <span style="display:inline-block;" t-field="company.street" 
+                                t-field-options='{"widget": "contact", "fields": ["name"], "no_marker": true}'
+                                />
+                            </b>
+                            <div t-field="company.name" 
+                                t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
+                        </div>
+                        <div class="col-xs-2" style="float:right">
+                            <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/>
+                        </div>
+                        <br /> <br /> <br />
+                        <div class="col-xs-2" style="float:right">
+                            Date: <span t-esc="time.strftime('%Y-%m-%d')"/>
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col-xs-2" style="float:right">
+                        Date: <span t-esc="time.strftime('%Y-%m-%d')"/>
+                        </div>
+                    </div> 
+
+                    <div class="row zero_min_height">
+                        <div class="col-xs-12">
+                            <div style="border-bottom: 1px solid black;"></div> 
+                        </div>
+                    </div>
+-->
+                    
+            </div>  <!-- Header slut -->
+    
+<!--            <div class="body">-->
+                                <t t-set="blocks" t-value="o.block_ids.sorted(key=lambda b: b.name)" />
+                                <span>Block: <t t-raw="blocks"/></span>
+
+  <t t-foreach="blocks" t-as="b">
+
+         <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:30px; "> 
+
+            <tr><td style="min-width:130px;max-width:130px;"><b>Owner: </b>
+<!--</td><td><span t-esc="b.owner_id.name"/> (<span t-esc="b.owner_id.ssi"/>)</td>-->-->
+<!-- 		<td style="min-width:130px;max-width:130px;"><b>Cert.No: </b></td><td><span t-esc="b.name"/></td>			-->
+<!--		<td style="min-width:130px;max-width:130px;"><b>Cancelled: </b></td><td><span t-esc="b.cancelled"/></td>		</tr>-->
+
+<!--            <tr><td style="min-width:130px;max-width:130px;"><b>Date of Birth: </b></td><td><span t-esc="b.owner_id.birthdate"/></td> 		-->
+<!--		<td style="min-width:130px;max-width:130px;"><b>Shares on Cert: </b></td><td><span t-esc="b.number_of_shares"/></td>-->
+<!--		<td style="min-width:130px;max-width:130px;"><b>Cancelled date: </b></td><td><span t-esc="b.date_cancelled"/></td>	</tr>-->
+
+<!--           <tr>	<td style="min-width:130px;max-width:130px;"><b>Street: </b></td><td><span t-esc="b.owner_id.address"/>, <span t-esc="b.owner_id.street2"/></td> -->
+<!--		<td style="min-width:130px;max-width:130px;"><b>Share Class: </b></td><td><span t-esc="b.share_class"/></td>	-->
+<!--		<td style="min-width:130px;max-width:130px;"><b>Numbers sold: </b></td><td><span t-esc="b.number_sold"/></td>		</tr>-->
+
+<!--            <tr><td style="min-width:130px;max-width:130px;"><b>Zip, City, Country </b></td><td><span t-esc="b.owner_id.zip"/>,<span t-esc="b.owner_id.city"/>,<span t-esc="b.owner_id.country_id.name"/> </td>-->
+<!--		<td style="min-width:130px;max-width:130px;"><b>Issued Date: </b></td><td><span t-esc="b.date_issued"/></td>-->
+<!--		<td style="min-width:130px;max-width:130px;"><b>Balance: </b></td><td>NoShares-NoSold</td>		</tr>-->
+
+<!--	    <tr><td style="min-width:130px;max-width:130px;"><b>Phone: </b></td><td>T:<span t-esc="b.owner_id.phone"/>, M:<span t-esc="b.owner_id.mobile"/></td>-->
+<!--		<td style="min-width:130px;max-width:130px;"><b>Cert Issed: </b></td><td><span t-esc="b.cert_issued"/></td>-->
+<!--		<td style="min-width:130px;max-width:130px;"><b>Price Sold:</b> </td><td><span t-esc="b.name"/></td>		</tr>-->
+
+<!--	    <tr><td style="min-width:130px;max-width:130px;"><b>Emption: </b></td><td><span t-esc="b.emption"/></td>-->
+<!--		<td style="min-width:130px;max-width:130px;"><b>New Cert.No: </b></td><td><span t-esc="b.name"/></td>		-->
+<!--		<td style="min-width:130px;max-width:130px;"><b>Email: </b></td><td><span t-esc="b.owner_id.email"/></td>	</tr>-->
+
+<!--            <tr><td style="min-width:130px;max-width:130px;"><b>Beneficiary: </b></td><td><span t-esc="b.beneficiary_id.name"/>  (<span t-esc="b.beneficiary_id.ssi"/>)</td> -->
+<!--		<td style="min-width:130px;max-width:130px;"><b>Price: </b></td><td><span t-esc="b.price"/></td>-->
+<!--		<td style="min-width:130px;max-width:130px;"> </td><td></td>		</tr>-->
+
+<!--            <tr><td style="min-width:130px;max-width:130px;"><b>Partowners: </b></td><td>-->
+<!--                        <t t-set="blocks" t-value="o.block_ids.sorted(key=lambda b: b.name)" />-->
+<!--                        	<p t-foreach="blocks" t-as="b">  -->
+<!--					<span t-esc="b.owner_id.name"/> (<span t-esc="b.owner_id.ssi"/>) at <span t-esc="b.owner_id.address"/>, T:<span t-esc="b.owner_id.phone"/>, M:<span t-esc="b.owner_id.mobile"/>, <span t-esc="b.owner_id.email"/> [tabb] <span t-esc="b.owner_id.ownership"/>, <span t-esc="b.owner_id.price"/> [currency], [tabb] <span t-esc="b.owner_id.date_sold"/>, <span t-esc="b.owner_id.price_sold"/>-->
+<!--				</p>-->
+<!--			</t>-->
+<!--		</td></tr>-->
+
+<!--            <tr><td style="min-width:130px;max-width:130px;"><b>Stakeholders: </b></td><td>-->
+<!--                        <t t-set="blocks" t-value="o.block_ids.sorted(key=lambda b: b.name)" />-->
+<!--                        	<p t-foreach="blocks" t-as="b">  -->
+<!--					<span t-esc="b.owner_id.name"/> (<span t-esc="b.owner_id.ssi"/>) at <span t-esc="b.owner_id.address"/>, T:<span t-esc="b.owner_id.phone"/>, M:<span t-esc="b.owner_id.mobile"/>, <span t-esc="b.owner_id.email"/> [tabb] <span t-esc="b.owner_id.ownership"/>, <span t-esc="b.owner_id.price"/> [currency], [tabb] <span t-esc="b.owner_id.date_sold"/>, <span t-esc="b.owner_id.price_sold"/>-->
+<!--				</p>-->
+<!--			</t>-->
+		</td></tr>
+
+	</table>
+</t>
+
+    
+ 
+
+
+<!--            </div> -->
+             <!-- body -->
+
+            </div>  <!-- page -->
+ 
+      </t>
+
+
+</template>
+
+
+
+
+    </data>
+</openerp>

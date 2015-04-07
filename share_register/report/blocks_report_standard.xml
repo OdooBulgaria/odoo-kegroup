@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+       <report 
+            id="share_register.report_blocks_report_standard"
+            model="res.company"
+            string="Blocks Report Standard"
+            report_type="qweb-pdf"
+            name="share_register.blocks_report_standard"
+            file="share_register.blocks_report_standard"
+            attachment_use="True"
+        />
+
+
+        <record id="paperformat_landscape" model="report.paperformat">
+            <field name="name">Landscape A4</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+<!--
+            <field name="report_ids" eval="[(6,0,[ref('share_register.report_blocks_report_standard')])]"/>
+-->
+        </record>
+
+
+        <record id="share_register.report_blocks_report_standard" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="share_register.paperformat_landscape"/>
+        </record>
+
+<template id="share_register.blocks_report_standard">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'share_register.blocks_report_standard_document')"/>
+        </t>
+    </t>
+</template>
+
+
+
+<template id="share_register.blocks_report_standard_document" name="Blocks Report Standard">
+
+            <t t-call="report.external_layout"> 
+            
+            
+            
+            
+                 <div class="page">
+                      <div class="row"> 
+                          <div class="col-xs-5 col-xs-offset-7"> 
+                          <address t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+                           <span t-field="o.partner_id.vat"/> 
+                        </div> 
+                    </div>
+ 
+
+
+            <div class="header">
+
+<!--
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <b style="font-size:large;">
+                            Owner: <span style="display:inline-block;" t-field="company.street" 
+                                t-field-options='{"widget": "contact", "fields": ["name"], "no_marker": true}'
+                                />
+                            </b>
+                            <div t-field="company.name" 
+                                t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
+                        </div>
+                        <div class="col-xs-2" style="float:right">
+                            <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/>
+                        </div>
+                        <br /> <br /> <br />
+                        <div class="col-xs-2" style="float:right">
+                            Date: <span t-esc="time.strftime('%Y-%m-%d')"/>
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col-xs-2" style="float:right">
+                        Date: <span t-esc="time.strftime('%Y-%m-%d')"/>
+                        </div>
+                    </div> 
+
+                    <div class="row zero_min_height">
+                        <div class="col-xs-12">
+                            <div style="border-bottom: 1px solid black;"></div> 
+                        </div>
+                    </div>
+-->
+                    
+            </div>  <!-- Header slut -->
+    
+
+
+             
+                <table style="width:100%;"> 
+                     <tbody> 
+<!--
+                     <tr style="padding-bottom:20px !important; margin:5px 5px 5px 0px"> 
+-->
+                        <tr>
+                         <td> 
+                             
+                             <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:30px; "> 
+                                 <tr style="margin-bottom:20px !important;"> 
+                                     <th style="min-width:130px;max-width:130px;">Company: <span t-esc="o.name"/></th>
+                                     <th class="text-center">Cert No.</th> 
+                                     <th class="text-center">New Shares</th> 
+                                     <th class="text-center">Shares on Cert</th> 
+                                     <th class="text-center">Class of Shares</th> 
+                                     <th class="text-center">Date</th> 
+                                     <th class="text-center">Number Sold</th> 
+                                     <th class="text-center">Date transferred/Cancelled</th> 
+                                     <th class="text-center">Balance</th> 
+                                     <th class="text-center">New cert.no</th> 
+                                </tr> 
+                                
+                                <t t-set="blocks" t-value="o.block_ids.sorted(key=lambda b: b.name)" />
+                                <span>Blocks<t t-raw="blocks"/></span>
+                                <tr t-foreach="blocks" t-as="b">  
+                                    <td class="text-left"> <span t-field="b.owner_id.name"/> </td> 
+                                    <td class="text-center"> <span t-field="b.name"/> </td> 
+                                    <td class="text-center">New Shares</td> 
+                                    <td class="text-center"> <span t-field="b.number_of_shares"/> </td> 
+                                    <td class="text-center"> <span t-field="b.share_class"/> </td> 
+                                    <td class="text-center"> <span t-field="b.date_issued"/> </td> 
+                                    <td class="text-center">Number Sold</td> 
+                                    <td class="text-center"> <span t-field="b.date_purchased"/> </td> 
+                                    <td class="text-center">Balance</td> 
+                                    <td class="text-center">New cert.no</td> 
+<!--                                    <td class="text-center"> <span t-field="b.nominal_value" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;b.company_id.currency_id&quot;}"/> </td> <td class="text-center"> <span t-field="b.purchase_price" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;b.company_id.currency_id&quot;}"/> </td> -->
+<!--                                    <td class="text-center"> <span t-esc="float(b.number_of_shares) / float(b.company_id.share_total or 1)*100"/><span>%</span> </td> -->
+<!--                                    <td class="text-left"><b>Owners Total:</b></td> <td class="text-center"/> -->
+
+<!--Old reports calculations-->
+<!--
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.number_of_shares), get_block(c,o)))"/></b></td> 
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.nominal_value), get_block(c,o)))"/></b></td> 
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.purchase_price), get_block(c,o)))"/></b></td> 
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: float(a.number_of_shares) / float(a.company_id.share_total or 1)*100, get_block(c,o)))"/><span>%</span></b></td> 
+                                    <td class="text-center"/> </tr> <tr style="border-bottom:2px solid black;"> 
+                                    <td class="text-left"><b>Company Total:</b></td> <td class="text-center"/> 
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.company_id.share_total), get_block(c,o)))"/></b></td> 
+                                    <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.company_id.share_capital), get_block(c,o)))"/></b></td> 
+-->
+                                </tr> 
+                                
+                                
+                            </table>
+                        </td> 
+                    </tr> 
+                </tbody> 
+                </table> 
+            </div>  <!-- page -->
+ 
+     
+        </t>
+
+</template>
+
+ 
+
+
+    </data>
+</openerp>

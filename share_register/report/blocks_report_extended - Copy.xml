@@ -4,18 +4,46 @@
 
 
 
+        <report 
+            id="share_register.report_blocks_report_extended"
+            model="res.company"
+            string="Blocks Report Extendend"
+            report_type="qweb-pdf"
+            name="share_register.blocks_report_extended"
+            file="share_register.blocks_report_extended"
+            attachment_use="True"
+        />
 
-<template id="share_register.company_blocks">
+
+        <record id="paperformat_landscape" model="report.paperformat">
+            <field name="name">Landscape A4</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(6,0,[ref('share_register.report_blocks_report_extended')])]"/>
+        </record>
+
+
+<template id="share_register.blocks_report_extended">
     <t t-call="report.html_container">
         <t t-foreach="doc_ids" t-as="doc_id">
-            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'share_register.company_blocks_document')"/>
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'share_register.blocks_report_extended_document')"/>
         </t>
     </t>
 </template>
 
 
 
-<template id="share_register.company_blocks_document" name="Company Blocks Report">
+<template id="share_register.blocks_report_extended_document" name="Blocks report extended">
 
             <t t-call="report.external_layout"> 
             
@@ -79,9 +107,13 @@
 -->
                         <tr>
                          <td> 
-                             
+  
+  '                           
                              <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:30px; "> 
                                  <tr style="margin-bottom:20px !important;"> 
+<!---->
+<!--NAME AND ADDRESS	CERT  NO.	New Shares	Shares on Cert	CLASS OF SHARES	DATE 	NUMBER SOLD	DATE TRANSFERRED	Balance	NEW CERT. NO.-->
+<!---->
                                      <th style="min-width:130px;max-width:130px;">Company: <span t-esc="o.name"/></th>
                                      <th class="text-center">Purchased Date</th> <th class="text-center">Number of Shares</th> 
                                      <th class="text-center">Nominal Value</th> <th class="text-center">Purchase Price</th> 
@@ -129,33 +161,7 @@
 
 </template>
 
-        <report 
-            id="share_blocks3"
-            model="res.company"
-            string="Company Block Report III"
-            report_type="qweb-pdf"
-            name="share_register.company_blocks"
-            file="share_register.company_blocks"
-            attachment_use="True"
-        />
 
-
-        <record id="paperformat_landscape" model="report.paperformat">
-            <field name="name">Landscape A4</field>
-            <field name="default" eval="True" />
-            <field name="format">A4</field>
-            <field name="page_height">0</field>
-            <field name="page_width">0</field>
-            <field name="orientation">Landscape</field>
-            <field name="margin_top">40</field>
-            <field name="margin_bottom">10</field>
-            <field name="margin_left">7</field>
-            <field name="margin_right">7</field>
-            <field name="header_line" eval="False" />
-            <field name="header_spacing">35</field>
-            <field name="dpi">90</field>
-            <field name="report_ids" eval="[(6,0,[ref('share_register.share_blocks3')])]"/>
-        </record>
 
 
     </data>

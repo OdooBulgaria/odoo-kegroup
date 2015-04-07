@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2014 Vertel AB (<http://vertel.se>).
+#    OpenERP, Open Source Management Solution, third party extension
+#    Copyright (C) 2004-2015 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -31,17 +31,17 @@ import logging
 _logger = logging.getLogger(__name__)
 
     
-class company_blocks(models.AbstractModel):
-    _name = 'report.share_register.company_blocks'
+class blocks_report_standard(models.AbstractModel):
+    _name = 'report.share_register.blocks_report_standard'
 
     @api.multi
     def render_html(self, data=None):
         _logger.info("Reporting Block")
-        report = self.env['report']._get_report_from_name('share_register.company_blocks')
+        report = self.env['report']._get_report_from_name('share_register.blocks_report_standard')
         for company in self.env['res.company'].browse(self._ids):
             blocks = self.env['share.block'].search([('company_id','=',company.id)])
 
-        return self.env['report'].render('share_register.company_blocks', {
+        return self.env['report'].render('share_register.blocks_report_standard', {
                     'report': report,
                     'doc_ids': self._ids,
                     'doc_model': report.model,
@@ -62,8 +62,7 @@ class res_company(models.Model):
     @api.depends('block_ids')
     def _get_blocks(self):
         self.blocks_ids = self.env['share.block'].search([('company_id','=',self.id)],order="name")
-    
-    
+        
     block_ids = fields.Many2one(compute="_get_blocks")
     
     @api.one

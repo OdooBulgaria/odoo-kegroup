@@ -19,6 +19,7 @@
 #
 ##############################################################################
 
-import company_blocks
+import blocks_report_standard
+import blocks_report_extended
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
