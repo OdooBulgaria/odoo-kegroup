@@ -21,12 +21,12 @@
             <field name="page_height">0</field>
             <field name="page_width">0</field>
             <field name="orientation">Landscape</field>
-            <field name="margin_top">40</field>
+            <field name="margin_top">20</field>
             <field name="margin_bottom">10</field>
             <field name="margin_left">7</field>
             <field name="margin_right">7</field>
             <field name="header_line" eval="False" />
-            <field name="header_spacing">35</field>
+            <field name="header_spacing">10</field>
             <field name="dpi">90</field>
 <!--
             <field name="report_ids" eval="[(6,0,[ref('share_register.report_blocks_report_standard')])]"/>
@@ -47,39 +47,99 @@
 </template>
 
 
+<template id="share_register.external_layout" name="External Layout">
+        <!-- Multicompany -->
+    <t t-if="o and 'company_id' in o">
+        <t t-set="company" t-value="o.company_id"/>
+    </t>
+    <t t-if="not o or not 'company_id' in o">
+        <t t-set="company" t-value="res_company"/>
+    </t>
+
+    <t t-call="share_register.external_layout_header"/>
+    <t t-raw="0"/>
+    <t t-call="share_register.external_layout_footer"/>
+</template>
+
+
+<template id="share_register.external_layout_header" name="External Layout Header">
+     <div class="header">
+        <div class="row">
+            
+            <div class="col-xs-2" style="float:left" t-if="company.logo">
+                <img  t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/>
+            </div>
+            
+            <div class="col-xs-3">
+                <b><div t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [ &quot;name&quot;], &quot;no_marker&quot;: true}" style="font-size: large;"/>
+                </b>
+                <div t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"/>
+            </div>
+            
+             <br/> <br/> <br/>
+
+            <div class="col-xs-4 col-xs-offset-2 text-right">
+                <ul class="list-inline">
+                    <li><span t-esc="time.strftime('%Y-%m-%d')"/></li>
+                    <li><span class="page"/></li>
+                    <li>(<span class="topage"/>)</li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</template>
+
+
+<template id="share_register.external_layout_footer" name="External Layout Footer">
+   <div class="footer">
+       <div class="row col-xs-2 col-xs-offset-3 text-right">
+                <ul class="list-inline">
+                    <li><span t-esc="time.strftime('%Y-%m-%d')"/></li>
+                    <li><span class="page"/></li>
+                    <li>/</li>
+                    <li>(<span class="topage"/>)</li>
+                </ul>
+            </div>
+       <div class="row zero_min_height">
+            <div class="col-xs-12">
+                 <div style="border-bottom: 1px solid black;"></div> 
+            </div>
+        </div>
+    </div>
+</template>
+
+
 
 <template id="share_register.blocks_report_standard_document" name="Blocks Report Standard">
 
-            <t t-call="report.external_layout"> 
+            <t t-call="share_register.external_layout"> 
             
             
             
             
                  <div class="page">
-                      <div class="row"> 
-                          <div class="col-xs-5 col-xs-offset-7"> 
-                          <address t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
-                           <span t-field="o.partner_id.vat"/> 
-                        </div> 
-                    </div>
- 
+                      
 
-
-            <div class="header">
 
 <!--
+            <div class="header">
+
+
                     <div class="row">
                         <div class="col-xs-3">
                             <b style="font-size:large;">
-                            Owner: <span style="display:inline-block;" t-field="company.street" 
+                            Owner: <span style="display:inline-block;" t-field="o.street" 
                                 t-field-options='{"widget": "contact", "fields": ["name"], "no_marker": true}'
                                 />
                             </b>
-                            <div t-field="company.name" 
+                            <div t-field="o.name" 
                                 t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
                         </div>
                         <div class="col-xs-2" style="float:right">
-                            <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/>
+                            <img t-if="o.logo" t-att-src="'data:image/png;base64,%s' % o.logo" style="max-height: 45px;"/>
                         </div>
                         <br /> <br /> <br />
                         <div class="col-xs-2" style="float:right">
@@ -98,9 +158,12 @@
                             <div style="border-bottom: 1px solid black;"></div> 
                         </div>
                     </div>
--->
+
                     
-            </div>  <!-- Header slut -->
+            </div> 
+-->
+            
+             <!-- Header slut -->
     
 
 
@@ -114,6 +177,7 @@
                          <td> 
                              
                              <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:30px; "> 
+                                 <thead>
                                  <tr style="margin-bottom:20px !important;"> 
                                      <th style="min-width:130px;max-width:130px;">Company: <span t-esc="o.name"/></th>
                                      <th class="text-center">Cert No.</th> 
@@ -124,22 +188,36 @@
                                      <th class="text-center">Number Sold</th> 
                                      <th class="text-center">Date transferred/Cancelled</th> 
                                      <th class="text-center">Balance</th> 
-                                     <th class="text-center">New cert.no</th> 
-                                </tr> 
+                                     <th class="text-center">New cert.no</th>
+                                </tr>
+                                <tr><th colspan="10">
+                                    <div class="row zero_min_height">
+                                        <div class="col-xs-12">
+                                             <div style="border-bottom: 1px solid black;"></div> 
+                                        </div>
+                                    </div>
                                 
-                                <t t-set="blocks" t-value="o.block_ids.sorted(key=lambda b: b.name)" />
-                                <span>Blocks<t t-raw="blocks"/></span>
-                                <tr t-foreach="blocks" t-as="b">  
-                                    <td class="text-left"> <span t-field="b.owner_id.name"/> </td> 
-                                    <td class="text-center"> <span t-field="b.name"/> </td> 
-                                    <td class="text-center">New Shares</td> 
-                                    <td class="text-center"> <span t-field="b.number_of_shares"/> </td> 
-                                    <td class="text-center"> <span t-field="b.share_class"/> </td> 
-                                    <td class="text-center"> <span t-field="b.date_issued"/> </td> 
-                                    <td class="text-center">Number Sold</td> 
-                                    <td class="text-center"> <span t-field="b.date_purchased"/> </td> 
-                                    <td class="text-center">Balance</td> 
-                                    <td class="text-center">New cert.no</td> 
+                                </th>
+                                
+                                
+                                </tr>
+        
+                                 
+                                 </thead>
+                                  
+                                                                
+                                <tr t-foreach="o.block_ids.sorted(key=lambda b: b.name)" t-as="b">  
+                                    <td class="text-left"><span t-field="b.owner_id.name"/> </td> 
+                                    <td class="text-center"><span t-field="b.name"/> </td> 
+                                    <td class="text-center"><span t-field="b.new_shares"/></td> 
+                                    <td class="text-center"><span t-field="b.number_of_shares"/> </td> 
+                                    <td class="text-center"><span t-field="b.share_class"/> </td> 
+                                    <td class="text-center"><span t-field="b.date_issued"/> </td> 
+                                    <td class="text-center"><span t-field="b.numbers_sold"/></td> 
+                                    <td class="text-center"><span t-field="b.date_purchased"/> </td> 
+                                    <td class="text-center"><span t-field="b.new_balance"/></td> 
+                                    <td class="text-center"><span t-field="b.new_cert_number"/></td> 
+                                                                        
 <!--                                    <td class="text-center"> <span t-field="b.nominal_value" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;b.company_id.currency_id&quot;}"/> </td> <td class="text-center"> <span t-field="b.purchase_price" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;b.company_id.currency_id&quot;}"/> </td> -->
 <!--                                    <td class="text-center"> <span t-esc="float(b.number_of_shares) / float(b.company_id.share_total or 1)*100"/><span>%</span> </td> -->
 <!--                                    <td class="text-left"><b>Owners Total:</b></td> <td class="text-center"/> -->

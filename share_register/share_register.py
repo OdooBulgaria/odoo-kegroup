@@ -149,7 +149,8 @@ class block_partowner(models.Model):
     partowner_id = fields.Many2one('res.partner', string='Part Owner', change_default=True, required=True, readonly=False,track_visibility='always')
     partowner_percent = fields.Float('Owner percent', digits_compute=dp.get_precision('Account'))
     purchase_price = fields.Float('Purchase price', digits_compute=dp.get_precision('Account'))    
-    purchase_date = fields.Date('Purchase Date',)    
+    purchase_date = fields.Date('Purchase Date',)
+    
 
 
 class share_block(models.Model):
@@ -182,7 +183,7 @@ class share_block(models.Model):
             ('draft', 'Draft'),
             ('open', 'Open'),
             ('cancel', 'Cancelled'),
-        ], string='Status', index=True, readonly=True, default='draft',
+        ], string='Status', index=True, readonly=False, default='draft',
         track_visibility='onchange', copy=False,
         help=" * The 'Draft' status is used when a user is encoding a new and unconfirmed Invoice.\n"
              " * The 'Open' status is used when user create invoice,a invoice number is generated.Its in open status till user does not pay invoice.\n"
@@ -251,11 +252,20 @@ class share_block(models.Model):
     numbers_sold = fields.Integer('Numbers Sold')
     cancelled_date = fields.Date(string='Cancelled Date')
 
-    new_balance = fields.Integer('New Balance')
+    new_shares = fields.Integer('New Shares')
+
+    @api.one
+    def _new_balance(self):
+        self.new_balance = self.number_of_shares + self.new_shares - self.numbers_sold
+    new_balance = fields.Integer('New Balance',compute="_new_balance")
+
     part_owner_purchase_date = fields.Date(string='Partowner Date')
     lastname = fields.Char()
     policy_number = fields.Char()
     new_cert_number = fields.Char('New certificate number')
+    
+    
+    
     
 class share_partowner(models.Model):
     _name = "share.partowner"

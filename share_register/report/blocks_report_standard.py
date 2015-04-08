@@ -58,12 +58,7 @@ class blocks_report_standard(models.AbstractModel):
 class res_company(models.Model):
     _inherit = "res.company"
 
-    @api.one
-    @api.depends('block_ids')
-    def _get_blocks(self):
-        self.blocks_ids = self.env['share.block'].search([('company_id','=',self.id)],order="name")
-        
-    block_ids = fields.Many2one(compute="_get_blocks")
+    block_ids = fields.One2many(comodel_name='share.block',inverse_name="company_id")
     
     @api.one
     @api.depends('block_ids')
@@ -71,7 +66,7 @@ class res_company(models.Model):
 #        self.shareholders_block = [b.partner_id for b in self.block_ids].sorted(key=lambda self: self.name)
         self.shareholders_block = [b.partner_id for b in self.block_ids]
     
-    shareholders_block = fields.Many2one(compute="_get_partner")
+    shareholders_block = fields.One2many('res.partner',compute="_get_partner")
      
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

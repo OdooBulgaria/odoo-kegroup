@@ -3,7 +3,6 @@
     <data>
 
 
-
         <report 
             id="share_register.report_blocks_report_extended"
             model="res.company"
@@ -34,14 +33,12 @@
 
             <t t-call="report.external_layout"> 
             
-            
-            
-            
+                        
                  <div class="page">
                       <div class="row"> 
                           <div class="col-xs-5 col-xs-offset-7"> 
-                          <address t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
-                           <span t-field="o.partner_id.vat"/> 
+<!--                          <address t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>-->
+<!--                           <span t-field="o.partner_id.vat"/> -->
                         </div> 
                    	</div>
  
@@ -86,58 +83,90 @@
     
 <!--            <div class="body">-->
                                 <t t-set="blocks" t-value="o.block_ids.sorted(key=lambda b: b.name)" />
-                                <span>Block: <t t-raw="blocks"/></span>
+<!--                                <span>Block: <t t-raw="blocks"/></span>-->
 
   <t t-foreach="blocks" t-as="b">
 
-         <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:30px; "> 
+         <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:10px;"> 
 
-            <tr><td style="min-width:130px;max-width:130px;"><b>Owner: </b>
-<!--</td><td><span t-esc="b.owner_id.name"/> (<span t-esc="b.owner_id.ssi"/>)</td>-->-->
-<!-- 		<td style="min-width:130px;max-width:130px;"><b>Cert.No: </b></td><td><span t-esc="b.name"/></td>			-->
-<!--		<td style="min-width:130px;max-width:130px;"><b>Cancelled: </b></td><td><span t-esc="b.cancelled"/></td>		</tr>-->
+        <tr><td style="min-width:100px;max-width:100px;"><b>Owner: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.owner_id.name"/> (<span t-esc="b.owner_id.ss_number"/>)</td>
+         <td style="min-width:80px;max-width:100px;"><b>Cert.No: </b></td>
+         <td style="min-width:160px;max-width:200px;"><span t-esc="b.name"/></td>			
+        <td style="min-width:80px;max-width:100px;"><b>State: </b></td>
+        <td style="min-width:160px;max-width:200px;"> <span t-esc="b.state"/> </td>		</tr>
 
-<!--            <tr><td style="min-width:130px;max-width:130px;"><b>Date of Birth: </b></td><td><span t-esc="b.owner_id.birthdate"/></td> 		-->
-<!--		<td style="min-width:130px;max-width:130px;"><b>Shares on Cert: </b></td><td><span t-esc="b.number_of_shares"/></td>-->
-<!--		<td style="min-width:130px;max-width:130px;"><b>Cancelled date: </b></td><td><span t-esc="b.date_cancelled"/></td>	</tr>-->
+        <tr><td style="min-width:100px;max-width:100px;"><b>Date of Birth: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.owner_id.birthdate"/></td> 		
+        <td style="min-width:80px;max-width:100px;"><b>Shares on Cert: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.number_of_shares"/></td>
+        <td style="min-width:80px;max-width:100px;"><b>Cancelled date: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.cancelled_date"/></td>	</tr>
 
-<!--           <tr>	<td style="min-width:130px;max-width:130px;"><b>Street: </b></td><td><span t-esc="b.owner_id.address"/>, <span t-esc="b.owner_id.street2"/></td> -->
-<!--		<td style="min-width:130px;max-width:130px;"><b>Share Class: </b></td><td><span t-esc="b.share_class"/></td>	-->
-<!--		<td style="min-width:130px;max-width:130px;"><b>Numbers sold: </b></td><td><span t-esc="b.number_sold"/></td>		</tr>-->
+	    <tr><td style="min-width:130px;max-width:130px;"><b>Street: </b></td>
+	    <td style="min-width:130px;max-width:130px;"><span t-esc="b.owner_id.street"/>, <span t-esc="b.owner_id.street2"/></td> 
+        <td style="min-width:80px;max-width:100px;"><b>Share Class: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.share_class"/></td>	
+        <td style="min-width:80px;max-width:100px;"><b>Numbers sold: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.numbers_sold"/></td>		</tr>
 
-<!--            <tr><td style="min-width:130px;max-width:130px;"><b>Zip, City, Country </b></td><td><span t-esc="b.owner_id.zip"/>,<span t-esc="b.owner_id.city"/>,<span t-esc="b.owner_id.country_id.name"/> </td>-->
-<!--		<td style="min-width:130px;max-width:130px;"><b>Issued Date: </b></td><td><span t-esc="b.date_issued"/></td>-->
-<!--		<td style="min-width:130px;max-width:130px;"><b>Balance: </b></td><td>NoShares-NoSold</td>		</tr>-->
+        <tr><td style="min-width:100px;max-width:100px;"><b>Zip, City, Country </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.owner_id.zip"/>,<span t-esc="b.owner_id.city"/>,<span t-esc="b.owner_id.country_id.name"/> </td>
+        <td style="min-width:80px;max-width:100px;"><b>Issued Date: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.date_issued"/></td>
+        <td style="min-width:80px;max-width:100px;"><b>Balance: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.new_balance"/></td>	</tr>
 
-<!--	    <tr><td style="min-width:130px;max-width:130px;"><b>Phone: </b></td><td>T:<span t-esc="b.owner_id.phone"/>, M:<span t-esc="b.owner_id.mobile"/></td>-->
-<!--		<td style="min-width:130px;max-width:130px;"><b>Cert Issed: </b></td><td><span t-esc="b.cert_issued"/></td>-->
-<!--		<td style="min-width:130px;max-width:130px;"><b>Price Sold:</b> </td><td><span t-esc="b.name"/></td>		</tr>-->
+	    <tr><td style="min-width:130px;max-width:130px;"><b>Phone: </b></td>
+	    <td style="min-width:130px;max-width:130px;">T:<span t-esc="b.owner_id.phone"/>, M:<span t-esc="b.owner_id.mobile"/></td>
+        <td style="min-width:80px;max-width:100px;"><b>Cert Issed: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.certificate_issued"/></td>
+        <td style="min-width:80px;max-width:100px;"><b>Price:</b> </td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.purchase_price"/></td>		</tr>
 
-<!--	    <tr><td style="min-width:130px;max-width:130px;"><b>Emption: </b></td><td><span t-esc="b.emption"/></td>-->
-<!--		<td style="min-width:130px;max-width:130px;"><b>New Cert.No: </b></td><td><span t-esc="b.name"/></td>		-->
-<!--		<td style="min-width:130px;max-width:130px;"><b>Email: </b></td><td><span t-esc="b.owner_id.email"/></td>	</tr>-->
+	    <tr><td style="min-width:130px;max-width:130px;"><b>Email: </b></td>
+	    <td style="min-width:130px;max-width:130px;"><span t-esc="b.owner_id.email"/></td>
+        <td style="min-width:80px;max-width:100px;"><b>New Cert.No: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.new_cert_number"/></td>		
+        <td style="min-width:80px;max-width:100px;"><b>Emption: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.emption"/></td></tr>
 
-<!--            <tr><td style="min-width:130px;max-width:130px;"><b>Beneficiary: </b></td><td><span t-esc="b.beneficiary_id.name"/>  (<span t-esc="b.beneficiary_id.ssi"/>)</td> -->
-<!--		<td style="min-width:130px;max-width:130px;"><b>Price: </b></td><td><span t-esc="b.price"/></td>-->
-<!--		<td style="min-width:130px;max-width:130px;"> </td><td></td>		</tr>-->
+        <tr><td style="min-width:100px;max-width:100px;"><b>Beneficiary: </b></td>
+        <td style="min-width:160px;max-width:200px;"><span t-esc="b.beneficiary.name"/>  (<span t-esc="b.beneficiary.ss_number"/>)</td> 
+        <td style="min-width:80px;max-width:100px;"><b>Price Sold: </b></td>
+        <td style="min-width:160px;max-width:200px;">[]</td>
+        <td style="min-width:160px;max-width:200px;"></td>
+        <td style="min-width:160px;max-width:200px;"></td></tr>
 
-<!--            <tr><td style="min-width:130px;max-width:130px;"><b>Partowners: </b></td><td>-->
+       	<t t-foreach="b.partowner_ids" t-as="p">  
+        <tr><td style="min-width:100px;max-width:100px;"><b>Partowner: </b><span t-esc="p.partowner_id.name"/> (<span t-esc="p.partowner_id.ss_number"/>)</td> 		
+	        <td style="min-width:160px;max-width:200px;"><span t-esc="p.partowner_id.contact_address"/></td>
+	        <td style="min-width:160px;max-width:200px;">T:<span t-esc="p.partowner_id.phone"/>, M:<span t-esc="p.partowner_id.mobile"/></td> 		
+	        <td style="min-width:160px;max-width:200px;"><span t-esc="p.partowner_id.email"/></td>
+	        <td style="min-width:160px;max-width:200px;"><span t-esc="p.partowner_percent"/>% (<span t-esc="p.purchase_price"/> SEK) </td>
+	        <td style="min-width:160px;max-width:200px;"> <span t-esc="p.purchase_date"/> </td>
+			</tr>
+		</t>
+
+       	<t t-foreach="b.stakeholder" t-as="s">  
+        <tr><td style="min-width:100px;max-width:100px;"><b>Stakeholder: </b><span t-esc="s.partowner_id.name"/> (<span t-esc="s.partowner_id.ss_number"/>)</td> 		
+			<td style="min-width:130px;max-width:130px;" colspan="2"><span t-esc="s.partowner_id.contact_address"/></td>
+	        <td style="min-width:160px;max-width:200px;">T:<span t-esc="s.partowner_id.phone"/> </td> 		
+	        <td style="min-width:160px;max-width:200px;">M:<span t-esc="p.partowner_id.mobile"/></td>
+	        <td style="min-width:160px;max-width:200px;"><span t-esc="s.partowner_id.email"/></td>
+			</tr>
+		</t>
+
+<!--            <tr><td style="min-width:100px;max-width:100px;"><b>Stakeholders: </b></td><td>-->
 <!--                        <t t-set="blocks" t-value="o.block_ids.sorted(key=lambda b: b.name)" />-->
 <!--                        	<p t-foreach="blocks" t-as="b">  -->
-<!--					<span t-esc="b.owner_id.name"/> (<span t-esc="b.owner_id.ssi"/>) at <span t-esc="b.owner_id.address"/>, T:<span t-esc="b.owner_id.phone"/>, M:<span t-esc="b.owner_id.mobile"/>, <span t-esc="b.owner_id.email"/> [tabb] <span t-esc="b.owner_id.ownership"/>, <span t-esc="b.owner_id.price"/> [currency], [tabb] <span t-esc="b.owner_id.date_sold"/>, <span t-esc="b.owner_id.price_sold"/>-->
+<!--					<span t-esc="b.owner_id.name"/> (<span t-esc="b.owner_id.ss_number"/>) at <span t-esc="b.owner_id.contact_address"/>, T:<span t-esc="b.owner_id.phone"/>, M:<span t-esc="b.owner_id.mobile"/>, <span t-esc="b.owner_id.email"/> [tabb] <span t-esc="b.owner_id.ownership"/>, <span t-esc="b.owner_id.price"/> [currency], [tabb] <span t-esc="b.owner_id.date_sold"/>, <span t-esc="b.owner_id.price_sold"/>-->
 <!--				</p>-->
 <!--			</t>-->
 <!--		</td></tr>-->
 
-<!--            <tr><td style="min-width:130px;max-width:130px;"><b>Stakeholders: </b></td><td>-->
-<!--                        <t t-set="blocks" t-value="o.block_ids.sorted(key=lambda b: b.name)" />-->
-<!--                        	<p t-foreach="blocks" t-as="b">  -->
-<!--					<span t-esc="b.owner_id.name"/> (<span t-esc="b.owner_id.ssi"/>) at <span t-esc="b.owner_id.address"/>, T:<span t-esc="b.owner_id.phone"/>, M:<span t-esc="b.owner_id.mobile"/>, <span t-esc="b.owner_id.email"/> [tabb] <span t-esc="b.owner_id.ownership"/>, <span t-esc="b.owner_id.price"/> [currency], [tabb] <span t-esc="b.owner_id.date_sold"/>, <span t-esc="b.owner_id.price_sold"/>-->
-<!--				</p>-->
-<!--			</t>-->
-		</td></tr>
-
 	</table>
+	<hr/>
 </t>
 
     

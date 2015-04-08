@@ -98,11 +98,11 @@
         <div class="row">
             <div class="col-xs-3">
                 <b style="font-size:large;">
-                Owner: <span style="display:inline-block;" t-field="o.self" 
+                Owner: <span style="display:inline-block;" t-field="o.name" 
                     t-field-options='{"widget": "contact", "fields": ["name"], "no_marker": true}'
                     />
                 </b>
-                <div t-field="o.self" 
+                <div t-field="o.name" 
                     t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
             </div>
             <div class="col-xs-2" style="float:right">

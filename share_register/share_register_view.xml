@@ -207,7 +207,7 @@
                 <form string="Block">
                 <header>
                     <button name="action_invoice_sent" type="object" string="Send by Email" class="oe_highlight" groups="base.group_user"/>
-                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,open,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
+                    <field name="state" widget="statusbar" nolabel="1"  clickable="True" statusbar_visible="draft,open,cancel" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
                 </header>
                 <sheet string="Block">
                     <h1>
@@ -220,12 +220,13 @@
                             <field name="block_share_numbers" />                            
                             <field name="number_of_shares"/>
                             <field name="numbers_sold"/>
+                            <field name="new_shares"/>
                             <field name="new_balance"/>
-                            <field name="share_class" />   
-                            <field name="state" />
+                            <field name="share_class" />
                             <field name="certificate_issued" />
                             <field name="emption" /> 
                             <field name="policy_number" />   
+                            <field name="new_cert_number" />
                         </group>
                         <group>
                             
@@ -266,13 +267,7 @@
                                 </tree>
                            </field>
                         </page>
-                        <page string="Beneficiary">
-                            <field name="beneficiary">
-                                <tree string="Beneficiary" editable="bottom">
-                                    <field name="name"/>
-                                </tree>
-                           </field>
-                        </page>
+
                         <page string="Stakeholders">
 <!--                            <field name="stakeholder">-->
 <!--                                <form string="Stakeholders" >-->

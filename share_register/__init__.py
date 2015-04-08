@@ -23,6 +23,6 @@ import block_report
 import company
 import share_register
 import report
-#import res_partner
+import res_partner
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

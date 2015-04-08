@@ -35,10 +35,10 @@ class res_partner(models.Model):
     def _get_ids(self, cr, uid, ids, flds, args, context=None):
         return {i: i for i in ids}
 
-    _columns = {
-        # hack to allow using plain browse record in qweb views
-        'self': fields.function(_get_ids, type='many2one', relation=_name),
-    }
+    #_columns = {
+        ## hack to allow using plain browse record in qweb views
+        #'self': fields.function(_get_ids, type='many2one', relation=_name),
+    #}
 
     def _display_address(self, cr, uid, address, without_company=False, context=None):
 
@@ -89,8 +89,10 @@ class res_partner(models.Model):
 
     share_ids     = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
     block_ids     = fields.One2many('share.block', 'owner_id', string='Blocks', readonly=True)
-    #partowner_ids   = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
+    partowner_ids   = fields.One2many('block.partowner', 'partowner_id', string='Part owner', )
     #beneficiary_ids = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
+    beneficiary_ids = fields.One2many('share.block', 'beneficiary',string='Beneficiary', )
+    stakeholder_ids = fields.One2many('share.block', 'stakeholder',string='Stakeholders', )
     #stakeholder_ids = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
     birth_date    = fields.Date(string='Birth Date')
     name_last     = fields.Char('Last name')
