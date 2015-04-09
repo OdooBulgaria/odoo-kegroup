@@ -6,13 +6,15 @@
     <t t-if="block_available(o) == True">
     <t t-call="share_register.partner_external_layout">
          <div class="page">
-            <table style="width:100%;" >
-                <tbody>
-                    <tr t-foreach="get_company(o)" t-as="c" style="padding-bottom:20px !important; margin:5px 5px 5px 0px" >
-                        <td >
+<!--            <table style="width:100%;" >-->
+<!--                <tbody>-->
+<!--                    <tr t-foreach="get_company(o)" t-as="c" style="padding-bottom:20px !important; margin:5px 5px 5px 0px" >-->
+                    <t t-foreach="get_company(o)" t-as="c" style="padding-bottom:20px !important; margin:5px 5px 5px 0px" >
+<!--                        <td >-->
                             <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:30px; " >
+			                <thead>
                                 <tr style="margin-bottom:20px !important;">
-                                    <th style="min-width:130px;max-width:130px;">Company: <span t-esc="c.name"/></th>
+                                    <th style="min-width:130px;max-width:130px;"><span t-esc="c.name"/></th>
                                     <th class="text-center">Purchased Date</th>
                                     <th class="text-center">Number of Shares</th>
                                     <th class="text-center">Nominal Value</th>
@@ -20,9 +22,17 @@
                                     <th class="text-center">Ownership %</th>
                                     <th class="text-center">Block Name</th>
                                 </tr>
-
+			                </thead>
                                 <tr t-foreach="get_block(c,o)" t-as="b" >
-                                    <td></td>
+                                    <td>
+
+<!--                                    <span t-esc="o.name"/>-->
+                                    <span t-esc="b.owner_id.name"/>
+
+<!--                                    The name of the blocs owner -->
+<!--                                    <t t-if "b.id in o.block_ids"><div t-raw="o.name"/></div></t>  -->
+<!--                                    <t t-if "b.id not in o.block_ids"><div t-raw="b.owner_id.name"/></div></t>-->
+                                    </td>
                                     <td class="text-center">
                                         <span t-field="b.date_purchased" /> 
                                     </td>
@@ -70,10 +80,11 @@
                                 </tr>
                             </table>
 
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+<!--                        </td>-->
+<!--                    </tr>-->
+    </t>
+<!--                </tbody>-->
+<!--            </table>-->
         </div>
     </t>
     </t>

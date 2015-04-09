@@ -60,7 +60,8 @@
     .ctable > tbody > tr > td,
     .ctable > tfoot > tr > td {
       padding: 8px;
-      line-height: 1.42857143;
+<!--      line-height: 1.42857143;-->
+      line-height: 1;
       vertical-align: top;
     }
     .ctable > thead > tr > th {

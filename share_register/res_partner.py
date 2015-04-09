@@ -89,13 +89,37 @@ class res_partner(models.Model):
 
     share_ids     = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
     block_ids     = fields.One2many('share.block', 'owner_id', string='Blocks', readonly=True)
+    @api.one
+    def _block_count(self): 
+        self.block_count = len(self.block_ids)
+    block_count = fields.Integer(compute="_block_count")
+    @api.one
+    def _block_share_count(self): 
+        self.block_share_count = sum([b.number_of_shares for b in self.block_ids]) 
+    block_share_count = fields.Integer(compute="_block_share_count")
+    
+    
     partowner_ids   = fields.One2many('block.partowner', 'partowner_id', string='Part owner', )
-    #beneficiary_ids = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
     beneficiary_ids = fields.One2many('share.block', 'beneficiary',string='Beneficiary', )
+    @api.one
+    def _beneficiary_count(self): 
+        self.beneficiary_count = len(self.beneficiary_ids)
+    beneficiary_count = fields.Integer(compute="_beneficiary_count")
     stakeholder_ids = fields.One2many('share.block', 'stakeholder',string='Stakeholders', )
-    #stakeholder_ids = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
+    @api.one
+    def _stakeholder_count(self): 
+        self.stakeholder_count = len(self.stakeholder_ids)
+    stakeholder_count = fields.Integer(compute="_stakeholder_count")    
     birth_date    = fields.Date(string='Birth Date')
     name_last     = fields.Char('Last name')
+    @api.one
+    def _block_all_ids(self):
+        blocks = self.block_ids + self.beneficiary_ids 
+        if self.partowner_ids:
+             blocks += self.env['share.block'].browse([b.block_id.id for b in self.partowner_ids])
+        self.block_all_ids = blocks
+        
+    block_all_ids     = fields.One2many('share.block', compute="_block_all_ids", string='All Blocks', readonly=True)
     
     
      # hack to allow using plain browse record in qweb views

@@ -100,7 +100,7 @@ class partnerblock_data(report_sxw.rml_parse,):
         self.context = context
 
     def _get_company(self, partner_brw):
-        block_brw = partner_brw.block_ids
+        block_brw = partner_brw.block_all_ids
         if block_brw:
             company_brw = [x.company_id for x in block_brw]
             company_brw = list(set(company_brw))  # To remove duplicate company_ids from the list
@@ -110,12 +110,12 @@ class partnerblock_data(report_sxw.rml_parse,):
     def _get_block(self, company_brw, partner_brw):
 
         if company_brw and partner_brw:
-            block_brw = [x for x in partner_brw.block_ids if x.company_id.id == company_brw.id]
+            block_brw = [x for x in partner_brw.block_all_ids if x.company_id.id == company_brw.id]
             return block_brw
         return []
 
     def _block_available(self, partner_brw):
-        block_brw = partner_brw.block_ids
+        block_brw = partner_brw.block_all_ids
         if block_brw:
             return True
         return False
