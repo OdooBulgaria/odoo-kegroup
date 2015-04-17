@@ -20,7 +20,7 @@
                                     <th class="text-center">Nominal Value</th>
                                     <th class="text-center">Purchase Price</th>
                                     <th class="text-center">Ownership %</th>
-                                    <th class="text-center">Block Name</th>
+                                    <th class="text-center">Cert Name</th>
                                 </tr>
 			                </thead>
                                 <tr t-foreach="get_block(c,o)" t-as="b" >

@@ -6,8 +6,8 @@
        <report 
             id="share_register.report_blocks_report_standard"
             model="res.company"
-            string="Blocks Report Standard"
-            report_type="qweb-pdf"
+            string="Certificate Report Standard"
+            report_type="qweb-html"
             name="share_register.blocks_report_standard"
             file="share_register.blocks_report_standard"
             attachment_use="True"
@@ -21,12 +21,12 @@
             <field name="page_height">0</field>
             <field name="page_width">0</field>
             <field name="orientation">Landscape</field>
-            <field name="margin_top">20</field>
-            <field name="margin_bottom">10</field>
-            <field name="margin_left">7</field>
-            <field name="margin_right">7</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
             <field name="header_line" eval="False" />
-            <field name="header_spacing">10</field>
+            <field name="header_spacing">40</field>
             <field name="dpi">90</field>
 <!--
             <field name="report_ids" eval="[(6,0,[ref('share_register.report_blocks_report_standard')])]"/>
@@ -63,11 +63,21 @@
 
 
 <template id="share_register.external_layout_header" name="External Layout Header">
+    <style>
+<!--    The text color for HTML-->
+    body {
+        color: #000 !important;
+        line-height: 11px;
+    }
+
+    </style>
+    
+    
      <div class="header">
         <div class="row">
             
             <div class="col-xs-2" style="float:left" t-if="company.logo">
-                <img  t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/>
+                <img  t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 200px;"/>
             </div>
             
             <div class="col-xs-3">
@@ -81,8 +91,8 @@
             <div class="col-xs-4 col-xs-offset-2 text-right">
                 <ul class="list-inline">
                     <li><span t-esc="time.strftime('%Y-%m-%d')"/></li>
-                    <li><span class="page"/></li>
-                    <li>(<span class="topage"/>)</li>
+<!--                    <li><span class="page"/></li>-->
+<!--                    <li>(<span class="topage"/>)</li>-->
                 </ul>
             </div>
         </div>
@@ -113,7 +123,7 @@
 
 
 
-<template id="share_register.blocks_report_standard_document" name="Blocks Report Standard">
+<template id="share_register.blocks_report_standard_document_1_lined" name="Certificate Report Standard">
 
             <t t-call="share_register.external_layout"> 
             
@@ -168,56 +178,67 @@
 
 
              
-                <table style="width:100%;"> 
-                     <tbody> 
+<!--                <table style="width:100%;"> -->
+<!--                     <tbody> -->
 <!--
                      <tr style="padding-bottom:20px !important; margin:5px 5px 5px 0px"> 
 -->
-                        <tr>
-                         <td> 
+<!--                        <tr>-->
+<!--                         <td> -->
                              
-                             <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:30px; "> 
+                             <table class="ctable" style="width:100%;border-style:none !important;margin-top:30px;margin-bottom:30px; "> 
                                  <thead>
                                  <tr style="margin-bottom:20px !important;"> 
-                                     <th style="min-width:130px;max-width:130px;">Company: <span t-esc="o.name"/></th>
+                                     <th style="min-width:100px;max-width:100px;" class="text-left">Company: <span t-esc="o.name"/></th>
                                      <th class="text-center">Cert No.</th> 
                                      <th class="text-center">New Shares</th> 
                                      <th class="text-center">Shares on Cert</th> 
                                      <th class="text-center">Class of Shares</th> 
                                      <th class="text-center">Date</th> 
                                      <th class="text-center">Number Sold</th> 
-                                     <th class="text-center">Date transferred/Cancelled</th> 
+                                     <th class="text-center">Date changed</th> 
                                      <th class="text-center">Balance</th> 
                                      <th class="text-center">New cert.no</th>
+                                     <th class="text-center">Comment</th>
                                 </tr>
-                                <tr><th colspan="10">
-                                    <div class="row zero_min_height">
-                                        <div class="col-xs-12">
-                                             <div style="border-bottom: 1px solid black;"></div> 
-                                        </div>
-                                    </div>
-                                
-                                </th>
-                                
-                                
-                                </tr>
+<!--                                <tr><th colspan="10">-->
+<!--                                    <div class="row zero_min_height">-->
+<!--                                        <div class="col-xs-12">-->
+<!--                                             <div style="border-bottom: 1px solid black;"></div> -->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                -->
+<!--                                </th>-->
+<!--                                    </tr>-->
         
                                  
                                  </thead>
-                                  
-                                                                
-                                <tr t-foreach="o.block_ids.sorted(key=lambda b: b.name)" t-as="b">  
-                                    <td class="text-left"><span t-field="b.owner_id.name"/> </td> 
-                                    <td class="text-center"><span t-field="b.name"/> </td> 
+<!--                                </table>-->
+	
+                                                                                                  
+                                <tr t-foreach="o.block_ids.sorted(key=lambda b: b.name)" t-as="b" style="line-height: 14px;">  
+<!--                                <t t-foreach="o.block_ids.sorted(key=lambda b: b.name)" t-as="b">  -->
+<!--                             <table class="ctable" style="width:100%;border-style:none !important;margin-top:30px;margin-bottom:30px; "> -->
+<!--									<tr  style="line-height: 14px;"> -->
+                                    <td style="min-width:100px;max-width:100px;" class="text-left"><span t-field="b.owner_id.name"/> <t t-if="b.owner_id.ss_number">(<span t-esc="b.owner_id.ss_number"/>)</t> <BR/>
+<!--                                     <span t-field="b.owner_id.contact_address"/>-->
+									<span t-esc="b.owner_id.street"/><t t-if="b.owner_id.street2">, <span t-esc="b.owner_id.street2"/> </t><BR/>
+									<span t-esc="b.owner_id.zip"/> <span t-esc="b.owner_id.city"/>, <span t-esc="b.owner_id.country_id.code"/>
+                                    <t t-if="b.policy_number"><BR/>Policy no. (<span t-field="b.policy_number"/> <span t-field="b.beneficiary.name"/>)</t></td>
+                                    <td class="text-center"><span t-field="b.name"/></td> 
                                     <td class="text-center"><span t-field="b.new_shares"/></td> 
                                     <td class="text-center"><span t-field="b.number_of_shares"/> </td> 
                                     <td class="text-center"><span t-field="b.share_class"/> </td> 
                                     <td class="text-center"><span t-field="b.date_issued"/> </td> 
                                     <td class="text-center"><span t-field="b.numbers_sold"/></td> 
                                     <td class="text-center"><span t-field="b.date_purchased"/> </td> 
-                                    <td class="text-center"><span t-field="b.new_balance"/></td> 
+                                    <td class="text-center"><t t-if="b.numbers_sold"><span t-field="b.new_balance"/></t></td> 
                                     <td class="text-center"><span t-field="b.new_cert_number"/></td> 
-                                                                        
+									<td class="text-left"><t t-if="b.comment"><span t-field="b.comment"/></t></td>
+                                    </tr>                                                                         
+                            </table>
+<!--                            <hr/>-->
+<!--</t>-->
 <!--                                    <td class="text-center"> <span t-field="b.nominal_value" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;b.company_id.currency_id&quot;}"/> </td> <td class="text-center"> <span t-field="b.purchase_price" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;b.company_id.currency_id&quot;}"/> </td> -->
 <!--                                    <td class="text-center"> <span t-esc="float(b.number_of_shares) / float(b.company_id.share_total or 1)*100"/><span>%</span> </td> -->
 <!--                                    <td class="text-left"><b>Owners Total:</b></td> <td class="text-center"/> -->
@@ -233,14 +254,12 @@
                                     <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.company_id.share_total), get_block(c,o)))"/></b></td> 
                                     <td class="text-center"><b><span t-esc="sum(map(lambda a: (a.company_id.share_capital), get_block(c,o)))"/></b></td> 
 -->
-                                </tr> 
                                 
-                                
-                            </table>
-                        </td> 
-                    </tr> 
-                </tbody> 
-                </table> 
+
+<!--                        </td> -->
+<!--                    </tr> -->
+<!--                </tbody> -->
+<!--                </table> -->
             </div>  <!-- page -->
  
      
@@ -248,7 +267,80 @@
 
 </template>
 
+
+<template id="share_register.blocks_report_standard_document" name="Certificate Report Standard">
+
+            <t t-call="share_register.external_layout"> 
+            
+            
+            
+            
+                 <div class="page">
+                             
+                             <table class="ctable" style="width:100%;border-style:none !important;margin-top:30px;margin-bottom:30px; "> 
+                                 <thead>
+                                 <tr style="margin-bottom:20px !important;"> 
+                                     <th style="min-width:100px;max-width:100px;" class="text-left">Company: <span t-esc="o.name"/></th>
+                                     <th style="min-width:30px;max-width:30px;" class="text-right">Cert No.</th> 
+                                     <th style="min-width:30px;max-width:30px;" class="text-right">New Shares</th> 
+                                     <th style="min-width:30px;max-width:30px;" class="text-right">Shares on Cert</th> 
+                                     <th style="min-width:30px;max-width:30px;" class="text-right">Class of Shares</th> 
+                                     <th style="min-width:30px;max-width:30px;" class="text-right">Date</th> 
+                                     <th style="min-width:30px;max-width:30px;" class="text-right">Number Sold</th> 
+                                     <th style="min-width:30px;max-width:30px;" class="text-right">Date changed</th> 
+                                     <th style="min-width:30px;max-width:30px;" class="text-right">Balance</th> 
+                                     <th style="min-width:30px;max-width:30px;" class="text-right">New cert.no</th>
+                                     <th style="min-width:50px;max-width:50px;" class="text-left">Comment</th>
+                                </tr>
+                                <tr><th colspan="11">
+                                    <div class="row zero_min_height">
+                                        <div class="col-xs-12">
+                                             <div style="border-bottom: 1px solid black;"></div> 
+                                        </div>
+                                    </div>
+                                
+                                </th>
+                                    </tr>
+        
+                                 
+                                 </thead>
+                                </table>
+	
+                                                                                                  
+<!--                                <tr t-foreach="o.block_ids.sorted(key=lambda b: b.name)" t-as="b" style="line-height: 14px;">  -->
+                                <t t-foreach="o.block_ids.sorted(key=lambda b: b.name)" t-as="b">  
+                             <table class="ctable" style="width:100%;border-style:none !important;margin-top:30px;margin-bottom:30px; "> 
+									<tr  style="line-height: 14px;"> 
+                                 <td style="min-width:100px;max-width:100px;" class="text-left"><span t-field="b.owner_id.name"/> <t t-if="b.owner_id.ss_number">(<span t-esc="b.owner_id.ss_number"/>)</t>. <span t-field="b.owner_id.contact_address"/>
+                                    <t t-if="b.policy_number"><BR/>Policy no. (<span t-field="b.policy_number"/> <span t-field="b.beneficiary.name"/>)</t>
+<!--                                    <td style="min-width:130px;max-width:130px;" class="text-left"><span t-field="b.owner_id.name"/> <t t-if="b.owner_id.ss_number">(<span t-esc="b.owner_id.ss_number"/>)</t> <BR/>-->
+<!--									<span t-esc="b.owner_id.street"/><t t-if="b.owner_id.street2">, <span t-esc="b.owner_id.street2"/> </t><BR/>-->
+<!--									<span t-esc="b.owner_id.zip"/> <span t-esc="b.owner_id.city"/>, <span t-esc="b.owner_id.country_id.code"/>-->
+
+                                    </td>
+                                    <td style="min-width:30px;max-width:30px;" class="text-left"><span t-field="b.name"/></td> 
+                                    <td style="min-width:30px;max-width:30px;" class="text-right"><span t-field="b.new_shares"/></td> 
+                                    <td style="min-width:30px;max-width:30px;" class="text-right"><span t-field="b.number_of_shares"/> </td> 
+                                    <td style="min-width:30px;max-width:30px;" class="text-right"><span t-field="b.share_class"/> </td> 
+                                    <td style="min-width:30px;max-width:30px;" class="text-right"><span t-field="b.date_issued"/> </td> 
+                                    <td style="min-width:30px;max-width:30px;" class="text-right"><span t-field="b.numbers_sold"/></td> 
+                                    <td style="min-width:30px;max-width:30px;" class="text-right"><span t-field="b.date_purchased"/> </td> 
+                                    <td style="min-width:30px;max-width:30px;" class="text-right"><t t-if="b.numbers_sold"><span t-field="b.new_balance"/></t></td> 
+                                    <td style="min-width:30px;max-width:30px;" class="text-right"><span t-field="b.new_cert_number"/></td> 
+									<td style="min-width:50px;max-width:50px;" class="text-left"><t t-if="b.comment"><span t-field="b.comment"/></t></td>
+                                    </tr>                                                                         
+                            </table>
+                            <hr/>
+</t>
+
+            </div>  <!-- page -->
  
+     
+        </t>
+
+</template>
+
+  
 
 
     </data>

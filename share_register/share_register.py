@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -121,7 +122,7 @@ class share_share(models.Model):
                              * It needs to be offered to previous owners before a new owner can be accepted.""")
 
 
-    block_id = fields.Many2one('share.block', string='Block', change_default=True,
+    block_id = fields.Many2one('share.block', string='Certificate', change_default=True,
         required=False, readonly=True, states={'draft': [('readonly', False)]}, default=lambda self: self._default_block(),)
 
 
@@ -144,7 +145,7 @@ class block_partowner(models.Model):
     _description = "Partowners of shares"
     _order = "name desc, id desc"
 
-    block_id = fields.Many2one('share.block', string='Block', change_default=True,required=True, readonly=False,track_visibility='always')
+    block_id = fields.Many2one('share.block', string='Certificate', change_default=True,required=True, readonly=False,track_visibility='always')
     name = fields.Char(string='Part Owner No.', index=True,readonly=False,)
     partowner_id = fields.Many2one('res.partner', string='Part Owner', change_default=True, required=True, readonly=False,track_visibility='always')
     partowner_percent = fields.Float('Owner percent', digits_compute=dp.get_precision('Account'))
@@ -156,7 +157,7 @@ class block_partowner(models.Model):
 class share_block(models.Model):
     _name = "share.block"
     _inherit = ['mail.thread']
-    _description = "Block of shares"
+    _description = "Certificate of shares"
     _order = "name desc, id desc"
 
     def _block(self, cr, uid, ids, name, args, context=None):
@@ -174,10 +175,7 @@ class share_block(models.Model):
     def _nominal_value(self):
         return 0.0
 
-
-
-
-    name = fields.Char(string='Block No.', index=True, readonly=True, states={'draft': [('readonly', False)]})
+    name = fields.Char(string='Cert No.', index=True, readonly=True, states={'draft': [('readonly', False)]})
     comment = fields.Text('Additional Information', track_visibility='onchange')
     state = fields.Selection([
             ('draft', 'Draft'),
@@ -201,7 +199,11 @@ class share_block(models.Model):
 #    block_partowner = fields.Many2many('res.partner', string='PartOwner', change_default=True, track_visibility='onchange')
 
     partowner_ids = fields.One2many('block.partowner', 'block_id', string='Part Owners', track_visibility='onchange')
-    partowner_names = fields.Char('Partowners',compute='_partowner_names',store=True)
+#    partowner_names = fields.Char('Partowners',compute='_partowner_names',store=True,)
+    partowner_names = fields.Char('Partowners',compute='_partowner_names',store=True,  track_visibility='onchange')
+    
+    meeting_ids =  fields.Many2many('calendar.event', relation="rel_blocks_calendar",string='Board meeting')
+
 
     @api.depends('partowner_ids')
     def _partowner_names(self):
@@ -247,7 +249,7 @@ class share_block(models.Model):
 #    share_ids = fields.One2many('share.share', 'share_block','Shares', change_default=True,required=False, readonly=True, states={'draft': [('readonly', False)]},)
 
 
-#    canceled_date  = fields
+#    cancelled_date  = fields
     transferred_date = fields.Date(string='Transferred Date')
     numbers_sold = fields.Integer('Numbers Sold')
     cancelled_date = fields.Date(string='Cancelled Date')

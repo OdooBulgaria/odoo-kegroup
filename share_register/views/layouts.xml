@@ -21,7 +21,7 @@
     <xpath expr="//head/link[@href='/web/static/src/css/full.css']" position="replace"></xpath>
 </template>
 
-<template id="report.html_container">
+<template id="report.Xhtml_container">
     <t t-set="body_classname" t-value="'container'"/>
     <t t-call="report.layout">
         <t t-raw="0"/>
@@ -30,7 +30,7 @@
 
 <template id="report.style">
     body {
-        color: #000 !important;
+        color: #0C0 !important;
     }
     .border-black td {
         border-top: 1px solid black !important;
@@ -43,7 +43,7 @@
     }
 </template>
 
-<template id="report.external_layout">
+<template id="report.Xexternal_layout">
     <!-- Multicompany -->
     <t t-if="o and 'company_id' in o">
         <t t-set="company" t-value="o.company_id"></t>
@@ -57,7 +57,7 @@
     <t t-call="report.external_layout_footer" />
 </template>
 
-<template id="report.external_layout_header">
+<template id="report.Xexternal_layout_header">
     <div class="header">
         <div class="row">
             <div class="col-xs-3">

@@ -38,7 +38,7 @@ class res_partner(models.Model):
     type     = fields.Selection([('default', 'Default'), ('invoice', 'Invoice'),
                                ('delivery', 'Shipping'), ('contact', 'Contact'),
                                ('other', 'Other')], 'Address Type',track_visibility='onchange',
-        help="Used to select automatically the right address according to the context in sales and purchases documents.")
+    help    ="Used to select automatically the right address according to the context in sales and purchases documents.")
     street  = fields.Char('Street',track_visibility='onchange',)
     street2 = fields.Char('Street2',track_visibility='onchange',)
     zip     = fields.Char('Zip', size=24,track_visibility='onchange', change_default=True)

@@ -5,13 +5,13 @@
             id="share_register.report_share_purchase_agreement"
             model="share.block"
             string="Share Purchase Agreement"
-            report_type="qweb-html"
+            report_type="qweb-pdf"
             name="share_register.share_purchase_agreement"
             file="share_register.share_purchase_agreement"
             attachment_use="True"
         />
         <record id="share_register.report_share_purchase_agreement" model="ir.actions.report.xml">
-            <field name="paperformat_id" ref="share_register.paperformat_landscape"/>
+            <field name="paperformat_id" ref="report.paperformat_euro"/>
         </record>
         
 
@@ -19,17 +19,22 @@
     <div class="header">
         <div class="row">
             <div class="col-xs-3">
-                <h1 style="font-size:large;">
-                Owner: <span  t-field="o.owner_id.name" />
-                </h1>
+<!--                <h1 style="font-size:large;">-->
+<!--                Owner: <span  t-field="o.owner_id.name" />-->
+<!--                </h1>-->
 <!--
                 <div t-field="o.owner_id.name" t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
 -->
             </div>
-            <div class="col-xs-2" style="float:right">
-                <img t-if="o.company_id.logo" t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 45px;"/>
+            <div class="col-xs-2" style="float:center">
+                <img t-if="o.company_id.logo" t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 100px;"/>
             </div>
-            <br /> <br /> <br />
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
             <div class="col-xs-2" style="float:right">
                 Date: <span t-esc="time.strftime('%Y-%m-%d')"/>
             </div>
@@ -42,27 +47,38 @@
          <div class="page">
              <div class="row">
              
-             
-<p>AGREEMENT for purchase of shares in … , BVI Company Registration. No …. a Company registered in British Virgin Islands.</p>
+<br/>
+<br/>
+<br/>
+<p><strong>AGREEMENT</strong> for purchase of shares in <span t-field="o.company_id.name" />, BVI Company Registration. No …. a Company registered in British Virgin Islands.</p>
 <p>The Company is authorised to issue and has issued 50,000 registered shares with no par value in three classes being 90 voting 
 management shares (“Management Shares”), 10 voting participating management shares all held by held by Mr. Kjell Edwall and 49,900 
 non-voting ordinary shares (“Ordinary Shares”). It is understood that each Ordinary Share acquired according to this agreement at 
 all times shall represent 1/49,900 of the total number of Ordinary Shares.</p>
 
 <p>This Agreement is made between <br/>
-(1) The Seller, Mr …, (born …), …, and <br/>
-(2) … of Nerine Chambers, …. <br/>
-(3) the Buyer<br/>
-Name:		X<br/>
-Address:		X<br/>
-Postal code and city: 	X				<br/>
-E-mail:  		X</p>
+(1) <strong>The Seller:</strong> Mr Kjell Roland Edwall, (born 1940-04-16), 1 Rue des Genêts, MC 98000 Monte Carlo, Monaco, and <br/>
+(2) <strong><span t-esc="o.company_id.name"/></strong> of Nerine Chambers, Road Town, Tortola, British Virgin Islands, and    <br/>
+(3) <strong>The Buyer:</strong> <span t-esc="o.owner_id.title.name"/> <span t-esc="o.owner_id.name"/>, (born <span t-esc="o.owner_id.birth_date"/>), 
+<span t-esc="o.owner_id.contact_address"/>, <span t-esc="o.owner_id.email"/></p>
 
-<p>§1.	The Seller holds Ordinary Shares in … and is intending to sell all or part of the shares as set out in Schedule 1 to this agreement (the “Shares”);</p>
-<p>§2.	The Seller agrees to sell, free from any encumbrances including any interest or equity of any person (including any right to acquire, option or right of pre-emption) or any mortgage, charge (fixed or floating), pledge, option, lien, assignment, hypothecation, security interest, title retention or any other security agreement or arrangement which has the effect of creating security or payment priority), and the Buyer agrees to buy the Shares from the Seller for the price of SEK … each, totalling XXXX (the “Purchase Price”).</p>
-<p>§3.	The Buyer agrees to pay for the Shares by transferring the total Purchase Price to the Seller’s bank account: …., Acc. holder: Mr … with address as above (the “Account”). The payment shall be made so as to be in the Account no later than 14 business days after the date of this agreement. For the purpose of this agreement a business day shall mean any day (other than a Saturday, Sunday or public holiday) when banks are open for business in the British Virgin Islands/Sweden. </p>
-<p>§4.	The Buyer shall receive within (60) days after full payment has been credited to the Account a newly issued share certificate in … for the share(s) purchased.</p>
-<p>§5.	…* agrees that on receipt of monies arising from its investments and those monies being distributable within the meaning of the BVI Business Companies Act, first to pay by way of dividend on the 10 voting participating management shares such amount so that the Seller can pay to the Buyer the Principal Amount (as referred to in the Schedule) or such proportion as is available for distribution; secondly to repay any costs arising and incurred by the Seller; and thirdly after making reserves for working capital if any, to pay distributable revenues by way of dividend amongst all ordinary participating shareholders.</p>
+<p>§1.	<strong>The Seller</strong> holds Ordinary Shares in <span t-field="o.company_id.name" /> and is intending to sell all or part of the shares as set out in Schedule 1 to this agreement (the “Shares”);</p>
+<p>§2.	<strong>The Seller</strong> agrees to sell, free from any encumbrances including any interest or equity of any person (including any right to acquire, 
+option or right of pre-emption) or any mortgage, charge (fixed or floating), pledge, option, lien, assignment, hypothecation, security interest, 
+title retention or any other security agreement or arrangement which has the effect of creating security or payment priority), and the Buyer 
+agrees to buy <span t-field="o.number_of_shares"/> Shares from the Seller for the price of totally <span t-field="o.purchase_price" 
+t-field-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/> (the “Purchase Price”).</p>
+<p>§3.	<strong>The Buyer</strong> agrees to pay for the Shares by transferring the total Purchase Price to the Seller’s bank account: 
+SE-Banken, Stockholm, Sweden, Acc. No 5201-00 685 72, Acc. holder: Mr  Kjell Edwall with address as above (the “Account”). 
+The payment shall be made so as to be in the Account no later than 14 business 
+days after the date of this agreement. For the purpose of this agreement a business day shall mean any day (other than a Saturday, 
+Sunday or public holiday) when banks are open for business in the British Virgin Islands/Sweden. </p>
+<p>§4.	<strong>The Buyer</strong> shall receive within (60) days after full payment has been credited to the Account a newly issued share 
+certificate in <span t-field="o.company_id.name" /> for the share(s) purchased.</p>
+<p>§5.	<strong><span t-field="o.company_id.name" /></strong>* agrees that on receipt of monies arising from its investments and those monies being distributable within the meaning of the BVI 
+Business Companies Act, first to pay by way of dividend on the 10 voting participating management shares such amount so that the Seller can 
+pay to the Buyer the Principal Amount (as referred to in the Schedule) or such proportion as is available for distribution; secondly to repay 
+any costs arising and incurred by the Seller; and thirdly after making reserves for working capital if any, to pay distributable revenues by way of dividend amongst all ordinary participating shareholders.</p>
 <p>§6.	If the Buyer does not fulfil his obligations, the Seller has the right to cancel this agreement without notice.</p>
 <p>§7.	Each party shall pay its own costs and expenses in relation to the negotiation, preparation, execution and carrying into effect of this agreement.</p>
 <p>§8. 	This agreement and the documents referred to or incorporated in it constitute the entire agreement between the parties relating to the subject matter of this agreement and supersede and extinguish any prior drafts, agreements, undertakings, representations, warranties and arrangements of any nature whatsoever, whether or not in writing, between the parties in relation to the subject matter of this agreement</p>
@@ -79,39 +95,74 @@ E-mail:  		X</p>
 <p>§12.	Each of the provisions of this agreement is severable.  If any such provision is or becomes illegal, invalid or unenforceable in any respect under the law of any jurisdiction , the legality, validity or enforceability in that jurisdiction of the remaining provisions of this agreement shall not in any way be affected or impaired thereby.</p>
 <p>§13.	This agreement may be executed in any number of counterparts (whether original or facsimile) and by the parties on different counterparts, but shall not be effective until each party has executed at least one counterpart. Each counterpart shall constitute an original of this agreement but all the counterparts shall together constitute one and the same agreement. </p>
 
-
-                                    <span t-esc="o.owner_id.name"/>
-                                    <span t-field="o.date_purchased" /> 
-	                                <span t-field="o.number_of_shares"/>
-                                    <span t-field="o.nominal_value" t-field-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/>
-                                    <span t-field="o.purchase_price" t-field-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}'/>
-                                    <span t-field="o.name" />
-
+<div align="center">
+<br/>
+<br/>
 								<table>
-									<tr><td>City:  ( xxxxxxxxx )</td><td>City:  Stockholm XXX</td></tr>
-									<tr><td>The Buyer: </td><td>The Seller</td></tr>
-								</table>    
-								
-								<span>
-								Schedule 1
+									<tr><td style="min-width:300px;max-width:300px;"><span t-esc="o.owner_id.city"/> <span t-esc="o.date_purchased" /></td>
+									<td style="min-width:50px;max-width:50px;"></td>
+									<td style="min-width:300px;max-width:300px;"><span t-esc="o.company_id.city"/> <span t-esc="o.date_purchased" /></td>
+									<td style="min-width:50px;max-width:50px;"></td>
+									<td style="min-width:300px;max-width:300px;"><span t-esc="o.company_id.city"/> <span t-esc="o.date_issued" /></td></tr>
 
-Details of Ordinary Shares to be sold
-Number of shares in …:
-Certificate No.
-Principal Amount: SEK XXX
+									<tr><td style="min-width:300px;max-width:300px;"><br/>The Buyer: </td>
+									<td style="min-width:50px;max-width:50px;"></td>
+									<td style="min-width:300px;max-width:300px;"><br/>The Seller:</td></tr>
+									<td style="min-width:50px;max-width:50px;"></td>
+									<td style="min-width:300px;max-width:300px;"><br/><span t-field="o.company_id.name" />:</td>
+
+									<tr><td style="min-width:300px;max-width:300px;"><br/><br/><hr/> </td>
+									<td style="min-width:50px;max-width:50px;"></td>
+									<td style="min-width:300px;max-width:300px;"><br/><br/><hr/></td>
+									<td style="min-width:50px;max-width:50px;"></td>
+									<td style="min-width:300px;max-width:300px;"><br/><br/><hr/></td></tr>
+									
+
+									<tr><td><span t-esc="o.owner_id.name"/> </td>
+									<td style="min-width:50px;max-width:50px;"></td>
+									<td style="min-width:300px;max-width:300px;">Kjell Edwall</td></tr>									
+									<td style="min-width:50px;max-width:50px;"></td>
+									<td style="min-width:300px;max-width:300px;">Director</td>
+									
+
+								</table>    
+</div>			
+
+<!--New page-->
+<div>
+								<span>
+page-break{
+    page-break-after:always;
+    clear:both;
+    display:block;
+    }
+								<h1 class="page-break">Schedule 1</h1>
+
+								<br/>
+Details of Ordinary Shares to be sold<br/>
+Number of shares in <span t-field="o.company_id.name" /><br/>
+Certificate No. <span t-field="o.name"/><br/>
+Principal Amount: <span t-field="o.purchase_price"/> SEK
 </span>                                
+</div>
                                     
              </div>                       
         </div>
 
        <div class="footer">
-             <div class="row">
-     
-            <div class="col-xs-2" style="float:right">
-                Date: <span t-esc="time.strftime('%Y-%m-%d')"/>
-            </div>
+          <div class="row">
+            <div class="col-xs-12" style="float:center">
+				<!--                Date: <span t-esc="time.strftime('%Y-%m-%d')"/>-->
+
+<br/>
+<br/>
+			<div class="col-xs-12" align="center">
+				<hr/>
+				<span t-field="o.company_id.name" />, <span t-field="o.company_id.street" />, <t t-if="o.company_id.street2"><span t-field="o.company_id.street2" />, </t><span t-field="o.company_id.zip" /> <span t-field="o.company_id.city" />, <span t-field="o.company_id.country_id.name" />. <span t-field="o.company_id.website" /> <span t-field="o.company_id.email" />
+			</div>
+           </div>
         </div>
-       </div>
+      </div>
 
 </template>
 

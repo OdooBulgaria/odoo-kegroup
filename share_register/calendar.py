@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2015 Vertel AB (<http://vertel.se>).
+#    Copyright (C) 2004-2014 Vertel AB (<http://vertel.se>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,6 +19,21 @@
 #
 ##############################################################################
 
-import blocks_report_standard
+import itertools
+from lxml import etree
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+from openerp import models, fields, api, _
+from openerp.exceptions import except_orm, Warning, RedirectWarning
+
+import openerp.addons.decimal_precision as dp
+
+
+class calendar_event(models.Model):
+    _inherit = 'calendar.event'
+    
+    block_ids = fields.Many2many('share.block',relation="rel_blocks_calendar")
+    @api.one
+    def _block_count(self): 
+        self.block_count = len(self.block_ids)
+    block_count = fields.Integer(compute="_block_count")
+

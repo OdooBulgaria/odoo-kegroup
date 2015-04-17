@@ -2,160 +2,102 @@
 <openerp>
     <data>
 
+<template id="share_register.blocks_report_extended_document_layout" name="Certificate report extended layout">
+        <t t-call="report.external_layout">
+            <div class="page">
+                <div class="row"> 
+                          <div class="col-xs-5 col-xs-offset-7"> 
 
-        <report 
-            id="share_register.report_blocks_report_extended"
-            model="res.company"
-            string="Blocks Report Extendend"
-            report_type="qweb-pdf"
-            name="share_register.blocks_report_extended"
-            file="share_register.blocks_report_extended"
-            attachment_use="True"
-        />
+                          </div> 
+                </div>
 
 
-        <record id="share_register.report_blocks_report_extended" model="ir.actions.report.xml">
-            <field name="paperformat_id" ref="share_register.paperformat_landscape"/>
-        </record>
+                <div class="Xheader">
 
 
-<template id="share_register.blocks_report_extended">
-    <t t-call="report.html_container">
-        <t t-foreach="doc_ids" t-as="doc_id">
-            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'share_register.blocks_report_extended_document')"/>
+                    
+                </div>  <!-- Header slut -->
+
+                <t t-raw="0" />  <!-- body -->
+            
+            </div> <!-- Page end -->
         </t>
-    </t>
 </template>
 
 
 
-<template id="share_register.blocks_report_extended_document" name="Blocks report extended">
-
-            <t t-call="report.external_layout"> 
-            
-                        
-                 <div class="page">
-                      <div class="row"> 
-                          <div class="col-xs-5 col-xs-offset-7"> 
-<!--                          <address t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>-->
-<!--                           <span t-field="o.partner_id.vat"/> -->
-                        </div> 
-                   	</div>
- 
-
-
-            <div class="header">
-
-<!--
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <b style="font-size:large;">
-                            Owner: <span style="display:inline-block;" t-field="company.street" 
-                                t-field-options='{"widget": "contact", "fields": ["name"], "no_marker": true}'
-                                />
-                            </b>
-                            <div t-field="company.name" 
-                                t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
-                        </div>
-                        <div class="col-xs-2" style="float:right">
-                            <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/>
-                        </div>
-                        <br /> <br /> <br />
-                        <div class="col-xs-2" style="float:right">
-                            Date: <span t-esc="time.strftime('%Y-%m-%d')"/>
-                        </div>
-                    </div>
-
-                     <div class="row">
-                        <div class="col-xs-2" style="float:right">
-                        Date: <span t-esc="time.strftime('%Y-%m-%d')"/>
-                        </div>
-                    </div> 
-
-                    <div class="row zero_min_height">
-                        <div class="col-xs-12">
-                            <div style="border-bottom: 1px solid black;"></div> 
-                        </div>
-                    </div>
--->
-                    
-            </div>  <!-- Header slut -->
-    
-<!--            <div class="body">-->
-                                <t t-set="blocks" t-value="o.block_ids.sorted(key=lambda b: b.name)" />
-<!--                                <span>Block: <t t-raw="blocks"/></span>-->
-
-  <t t-foreach="blocks" t-as="b">
-
-         <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:10px;"> 
+<template id="share_register.blocks_report_extended_document_body" name="Certificate report extended body">
+    <t t-foreach="blocks" t-as="b">
+        <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:10px;"> 
 
         <tr><td style="min-width:100px;max-width:100px;"><b>Owner: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.owner_id.name"/> (<span t-esc="b.owner_id.ss_number"/>)</td>
-         <td style="min-width:80px;max-width:100px;"><b>Cert.No: </b></td>
-         <td style="min-width:160px;max-width:200px;"><span t-esc="b.name"/></td>			
-        <td style="min-width:80px;max-width:100px;"><b>State: </b></td>
-        <td style="min-width:160px;max-width:200px;"> <span t-esc="b.state"/> </td>		</tr>
+        <td style="min-width:300px;max-width:300px;"><span t-esc="b.owner_id.name"/> </td>
+        <td style="min-width:101px;max-width:101px;"><b>Cert.No: </b></td>
+        <td style="min-width:102px;max-width:102px;"><span t-esc="b.name"/></td>			
+        <td style="min-width:103px;max-width:103px;"><b>State: </b></td>
+        <td style="min-width:104px;max-width:104px;"> <span t-esc="b.state"/> </td>		</tr>
 
         <tr><td style="min-width:100px;max-width:100px;"><b>Date of Birth: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.owner_id.birthdate"/></td> 		
-        <td style="min-width:80px;max-width:100px;"><b>Shares on Cert: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.number_of_shares"/></td>
-        <td style="min-width:80px;max-width:100px;"><b>Cancelled date: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.cancelled_date"/></td>	</tr>
+        <td style="min-width:300px;max-width:300px;"><span t-esc="b.owner_id.birthdate"/><t t-if="b.owner_id.ss_number">(<span t-esc="b.owner_id.ss_number"/>)</t></td> 		
+        <td style="min-width:151px;max-width:151px;"><b>Issued Date: </b></td>
+        <td style="min-width:102px;max-width:100px;"><span t-esc="b.date_issued"/></td>
+        <td style="min-width:153px;max-width:153px;"><b>Share Class:</b></td>
+        <td style="min-width:104px;max-width:100px;"><span t-esc="b.share_class"/></td>	</tr>
 
-	    <tr><td style="min-width:130px;max-width:130px;"><b>Street: </b></td>
-	    <td style="min-width:130px;max-width:130px;"><span t-esc="b.owner_id.street"/>, <span t-esc="b.owner_id.street2"/></td> 
-        <td style="min-width:80px;max-width:100px;"><b>Share Class: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.share_class"/></td>	
-        <td style="min-width:80px;max-width:100px;"><b>Numbers sold: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.numbers_sold"/></td>		</tr>
+	    <tr><td style="min-width:130px;max-width:100px;"><b>Street: </b></td>
+	    <td style="min-width:300px;max-width:300px;"><span t-esc="b.owner_id.street"/><t t-if="b.owner_id.street2">, <span t-esc="b.owner_id.street2"/> </t></td> 
+        <td style="min-width:151px;max-width:151px;"><b>Shares on Cert: </b></td>
+        <td style="min-width:102px;max-width:100px;"><span t-esc="b.number_of_shares"/></td>	
+        <td style="min-width:153px;max-width:153px;"><b>Emption: </b></td>
+        <td style="min-width:104px;max-width:100px;"><span t-esc="b.emption"/></td>		</tr>
 
-        <tr><td style="min-width:100px;max-width:100px;"><b>Zip, City, Country </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.owner_id.zip"/>,<span t-esc="b.owner_id.city"/>,<span t-esc="b.owner_id.country_id.name"/> </td>
-        <td style="min-width:80px;max-width:100px;"><b>Issued Date: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.date_issued"/></td>
-        <td style="min-width:80px;max-width:100px;"><b>Balance: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.new_balance"/></td>	</tr>
+        <tr><td style="min-width:100px;max-width:100px;"><b>Address: </b></td>
+        <td style="min-width:300px;max-width:300px;"><span t-esc="b.owner_id.zip"/> <span t-esc="b.owner_id.city"/>, <span t-esc="b.owner_id.country_id.code"/>. </td>
+        <td style="min-width:151px;max-width:151px;"><b>Price:</b></td>
+        <td style="min-width:102px;max-width:100px;"><span t-esc="b.purchase_price"/></td>
+        <td style="min-width:102px;max-width:100px;"><b>Cert Issued: </b></td>
+        <td style="min-width:153px;max-width:153px;"><span t-esc="b.certificate_issued"/></td>	</tr>
 
-	    <tr><td style="min-width:130px;max-width:130px;"><b>Phone: </b></td>
-	    <td style="min-width:130px;max-width:130px;">T:<span t-esc="b.owner_id.phone"/>, M:<span t-esc="b.owner_id.mobile"/></td>
-        <td style="min-width:80px;max-width:100px;"><b>Cert Issed: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.certificate_issued"/></td>
-        <td style="min-width:80px;max-width:100px;"><b>Price:</b> </td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.purchase_price"/></td>		</tr>
+	    <tr><td style="min-width:100px;max-width:100px;"><b>Phone: </b></td>
+	    <td style="min-width:300px;max-width:300px;"><t t-if="b.owner_id.phone"> T:<span t-esc="b.owner_id.phone"/></t> <t t-if="b.owner_id.mobile">M:<span t-esc="b.owner_id.mobile"/></t></td>
+        <td style="min-width:151px;max-width:151px;"><t t-if="b.cancelled_date"><b>Cancelled date: </b></t></td>
+        <td style="min-width:102px;max-width:100px;"><span t-esc="b.cancelled_date"/></td>
+        <td style="min-width:153px;max-width:153px;"><t t-if="b.new_cert_number"><b>New Cert. No.:</b> </t></td>
+        <td style="min-width:104px;max-width:100px;"><span t-esc="b.new_cert_number"/></td>	</tr>
 
-	    <tr><td style="min-width:130px;max-width:130px;"><b>Email: </b></td>
-	    <td style="min-width:130px;max-width:130px;"><span t-esc="b.owner_id.email"/></td>
-        <td style="min-width:80px;max-width:100px;"><b>New Cert.No: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.new_cert_number"/></td>		
-        <td style="min-width:80px;max-width:100px;"><b>Emption: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.emption"/></td></tr>
+	    <tr><td style="min-width:100px;max-width:100px;"><b>Email: </b></td>
+	    <td style="min-width:300px;max-width:300px;"><span t-esc="b.owner_id.email"/></td>
+        <td style="min-width:151px;max-width:151px;"><t t-if="b.numbers_sold"><b>Numbers sold: </b></t></td>
+        <td style="min-width:102px;max-width:100px;"><t t-if="b.numbers_sold"><span t-esc="b.numbers_sold"/></t></td>		
+        <td style="min-width:153px;max-width:153px;"><t t-if="b.numbers_sold"><b>New Balance: </b></t></td>
+        <td style="min-width:104px;max-width:100px;"><t t-if="b.numbers_sold"><span t-esc="b.new_balance"/></t></td></tr>
 
+<t t-if="b.beneficiary.name">
         <tr><td style="min-width:100px;max-width:100px;"><b>Beneficiary: </b></td>
-        <td style="min-width:160px;max-width:200px;"><span t-esc="b.beneficiary.name"/>  (<span t-esc="b.beneficiary.ss_number"/>)</td> 
-        <td style="min-width:80px;max-width:100px;"><b>Price Sold: </b></td>
-        <td style="min-width:160px;max-width:200px;">[]</td>
-        <td style="min-width:160px;max-width:200px;"></td>
-        <td style="min-width:160px;max-width:200px;"></td></tr>
-
+        <td style="min-width:300px;max-width:300px;"><span t-esc="b.beneficiary.name"/>  (<span t-esc="b.beneficiary.ss_number"/>)</td> 
+        <td style="min-width:151px;max-width:151px;"></td>
+        <td style="min-width:102px;max-width:100px;"></td>
+        <td style="min-width:153px;max-width:153px;"></td>
+        <td style="min-width:104px;max-width:100px;"></td></tr>
+</t>
        	<t t-foreach="b.partowner_ids" t-as="p">  
-        <tr><td style="min-width:100px;max-width:100px;"><b>Partowner: </b><span t-esc="p.partowner_id.name"/> (<span t-esc="p.partowner_id.ss_number"/>)</td> 		
-	        <td style="min-width:160px;max-width:200px;"><span t-esc="p.partowner_id.contact_address"/></td>
-	        <td style="min-width:160px;max-width:200px;">T:<span t-esc="p.partowner_id.phone"/>, M:<span t-esc="p.partowner_id.mobile"/></td> 		
-	        <td style="min-width:160px;max-width:200px;"><span t-esc="p.partowner_id.email"/></td>
-	        <td style="min-width:160px;max-width:200px;"><span t-esc="p.partowner_percent"/>% (<span t-esc="p.purchase_price"/> SEK) </td>
-	        <td style="min-width:160px;max-width:200px;"> <span t-esc="p.purchase_date"/> </td>
+        <tr><td style="min-width:350px;max-width:500px;" colspan="3"><b>Partowner: </b><span t-esc="p.partowner_id.name"/> (<span t-esc="p.partowner_id.ss_number"/>), <span t-esc="p.partowner_id.contact_address"/></td>
+	        <td style="min-width:151px;max-width:251px;"><t t-if="p.partowner_id.phone"> T:<span t-esc="p.partowner_id.phone"/></t> <t t-if="p.partowner_id.mobile">M:<span t-esc="p.partowner_id.mobile"/></t></td> 		
+	        <td style="min-width:152px;max-width:202px;"><span t-esc="p.partowner_id.email"/></td>
+	        <td style="min-width:103px;max-width:103px;"><span t-esc="p.partowner_percent"/>% (<span t-esc="p.purchase_price"/>). <span t-esc="p.purchase_date"/> </td>
 			</tr>
 		</t>
 
        	<t t-foreach="b.stakeholder" t-as="s">  
-        <tr><td style="min-width:100px;max-width:100px;"><b>Stakeholder: </b><span t-esc="s.partowner_id.name"/> (<span t-esc="s.partowner_id.ss_number"/>)</td> 		
-			<td style="min-width:130px;max-width:130px;" colspan="2"><span t-esc="s.partowner_id.contact_address"/></td>
-	        <td style="min-width:160px;max-width:200px;">T:<span t-esc="s.partowner_id.phone"/> </td> 		
-	        <td style="min-width:160px;max-width:200px;">M:<span t-esc="p.partowner_id.mobile"/></td>
-	        <td style="min-width:160px;max-width:200px;"><span t-esc="s.partowner_id.email"/></td>
+        <tr><td style="min-width:350px;max-width:600px;" colspan="3"><b>Stakeholder: </b><span t-esc="s.name"/> (<span t-esc="s.ss_number"/>), <span t-esc="s.contact_address"/></td>
+	        <td style="min-width:101px;max-width:101px;"><t t-if="s.phone"> T:<span t-esc="s.phone"/></t> <t t-if="s.mobile">M:<span t-esc="s.mobile"/></t></td> 		
+	        <td style="min-width:202px;max-width:202px;" colspan="2"><span t-esc="s.email"/></td>
 			</tr>
 		</t>
+
+		<tr><td style="min-width:50px;max-width:50px;"><strong>Comment:</strong></td>
+			<td colspan="10"><t t-if="b.comment"><span t-field="b.comment"/></t></td>
+			</tr>
 
 <!--            <tr><td style="min-width:100px;max-width:100px;"><b>Stakeholders: </b></td><td>-->
 <!--                        <t t-set="blocks" t-value="o.block_ids.sorted(key=lambda b: b.name)" />-->
@@ -168,19 +110,118 @@
 	</table>
 	<hr/>
 </t>
-
-    
- 
+</template>
 
 
-<!--            </div> -->
-             <!-- body -->
+<!-- res.company -->
 
-            </div>  <!-- page -->
- 
+<report 
+            id="share_register.report_blocks_report_extended_company"
+            model="res.company"
+            string="Certificate Report Extendend"
+            report_type="qweb-pdf"
+            name="share_register.blocks_report_extended_company"
+            file="share_register.blocks_report_extended_company"
+            attachment_use="True"
+/>
+
+<record id="share_register.report_blocks_report_extended_company" model="ir.actions.report.xml">
+    <field name="paperformat_id" ref="share_register.paperformat_landscape"/>
+</record>
+
+
+<template id="share_register.blocks_report_extended_company">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'share_register.blocks_report_extended_document_company')"/>
+        </t>
+    </t>
+</template>
+
+
+<template id="share_register.blocks_report_extended_document_company" name="Certificate report extended company"> 
+        <t t-set="company" t-value="o.id" />
+        <t t-call="share_register.blocks_report_extended_document_layout"> 
+            <t t-set="blocks" t-value="o.block_ids.sorted(key=lambda b: b.name)" />
+            <t t-call="share_register.blocks_report_extended_document_body"/>             
       </t>
+</template>
 
 
+
+
+<!-- share.block -->
+
+<report 
+            id="share_register.report_blocks_report_extended_block"
+            model="share.block"
+            string="Certificate Report Extendend"
+            report_type="qweb-pdf"
+            name="share_register.blocks_report_extended_block"
+            file="share_register.blocks_report_extended_block"
+            attachment_use="True"
+/>
+
+
+        <record id="share_register.report_blocks_report_extended_block" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="share_register.paperformat_landscape"/>
+        </record>
+
+
+<template id="share_register.blocks_report_extended_block">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'owner_id.lang', 'share_register.blocks_report_extended_document_block')"/>
+        </t>
+    </t>
+</template>
+
+
+<template id="share_register.blocks_report_extended_document_block" name="Certificate report extended block"> 
+        <t t-set="company" t-value="o.company_id" />
+        <t t-call="share_register.blocks_report_extended_document_layout"> 
+            <t t-set="blocks" t-value="o" />
+            <t t-call="share_register.blocks_report_extended_document_body"/>             
+        </t>
+</template>
+
+
+<!-- res.partner -->
+
+<report 
+            id="share_register.report_blocks_report_extended_partner"
+            model="res.partner"
+            string="Certificate Report Extendend"
+            report_type="qweb-pdf"
+            name="share_register.blocks_report_extended_partner"
+            file="share_register.blocks_report_extended_partner"
+            attachment_use="True"
+/>
+
+
+        <record id="share_register.report_blocks_report_extended_partner" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="share_register.paperformat_landscape"/>
+        </record>
+
+
+<template id="share_register.blocks_report_extended_partner">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'lang', 'share_register.blocks_report_extended_document_partner')"/>
+        </t>
+    </t>
+</template>
+
+
+<template id="share_register.blocks_report_extended_document_partner" name="Certificate report extended partner">
+        <t t-set="blocks" t-value="o.block_all_ids.sorted(key=lambda b: b.name)" />
+<!--
+        <t t-if="len(blocks)==0" t-set="company" t-value="" />
+        <t t-if="len(blocks)>0" t-set="company" t-value="blocks[0].company_id" />
+-->
+        <t t-call="share_register.blocks_report_extended_document_layout"> 
+            <t t-call="share_register.blocks_report_extended_document_body"/>             
+        </t>
 </template>
 
 

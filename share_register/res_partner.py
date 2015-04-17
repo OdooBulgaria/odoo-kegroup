@@ -88,7 +88,7 @@ class res_partner(models.Model):
 #
 
     share_ids     = fields.One2many('share.share', 'owner_id', string='Shares', readonly=True)
-    block_ids     = fields.One2many('share.block', 'owner_id', string='Blocks', readonly=True)
+    block_ids     = fields.One2many('share.block', 'owner_id', string='Certificates', readonly=True)
     @api.one
     def _block_count(self): 
         self.block_count = len(self.block_ids)
@@ -119,7 +119,7 @@ class res_partner(models.Model):
              blocks += self.env['share.block'].browse([b.block_id.id for b in self.partowner_ids])
         self.block_all_ids = blocks
         
-    block_all_ids     = fields.One2many('share.block', compute="_block_all_ids", string='All Blocks', readonly=True)
+    block_all_ids     = fields.One2many('share.block', compute="_block_all_ids", string='All Certificates', readonly=True)
     
     
      # hack to allow using plain browse record in qweb views

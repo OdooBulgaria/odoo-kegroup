@@ -21,11 +21,11 @@
 
 {
     'name': 'Share Register',
-    'version': '2.2',
+    'version': '2.3',
     'author': 'Vertel AB',
     'category': 'base',
     'website': 'http://www.vertel.se',
-    'summary': 'Registry with share blocks, shareholders, stakeholders and partowners on blocks.)',
+    'summary': 'Registry with share certificates (blocks), shareholders, stakeholders and partowners on certificates.)',
     'description': """
 Share Registry
 ==============
@@ -34,18 +34,19 @@ Sponsor:
 KE-Group
 
     """,
-    'depends': ['base_setup', 'base', 'mail', 'account', 'report'],
+    'depends': ['base_setup', 'base', 'mail', 'account', 'report','calendar'],
     'data': [
-        'views/layouts.xml',
-        'views/partnerlayouts.xml',
-        'block_report.xml',
-        'company_view.xml',
-        'res_partner_view.xml',
-        'share_register_view.xml',
-        'views/report_block.xml',
+#        'views/layouts.xml',
+#        'views/partnerlayouts.xml',
+#        'block_report.xml',
+        'views/company_view.xml',
+        'views/res_partner_view.xml',
+        'views/share_register_view.xml',
+        'views/calendar_view.xml',
         'views/report_partnerblock.xml',
         'security/ir.model.access.csv',
         'security/share_register.xml',
+#        'report/report_block.xml',
         'report/blocks_report_standard.xml',
         'report/blocks_report_extended.xml',
         'report/share_purchase_agreement.xml',

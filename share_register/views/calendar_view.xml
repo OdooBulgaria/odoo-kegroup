@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_calendar_inherit_form">
+            <field name="name">view.calendar.form.inherit</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+            <field name="model">calendar.event</field>
+            <field name="arch" type="xml">
+        
+                <page string="Misc" position="after">
+                    <page string="Certificates">
+                        <field name="block_ids" />
+                    </page>
+                </page>
+
+                <xpath expr="//div[@class='oe_title']" position="after">                    
+                       <div class="oe_right oe_button_box" name="buttons"> 
+                            <button class="oe_inline oe_stat_button" type="action" name="%(share_register.action_share_block_tree)d" 
+                                context="{'search_default_meeting_ids': active_id, 'default_meeting_ids': active_id}"
+                                icon="fa-list">
+                                <field  string="Certificates" name="block_count" widget="statinfo"/>
+                            </button>   
+                       </div>
+                </xpath>
+
+            </field>
+
+
+            
+        </record>
+
+
+    </data>
+    
+    
+</openerp>
