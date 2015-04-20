@@ -195,13 +195,10 @@ class share_block(models.Model):
     beneficiary = fields.Many2one('res.partner', string='Beneficiary', change_default=True, track_visibility='onchange')
 
     stakeholder = fields.Many2many('res.partner', string='Stakeholder', change_default=True, track_visibility='onchange')
-#    block_partowner = fields.Many2one('res.partner', string='PartOwner', change_default=True, )
-#    block_partowner = fields.Many2many('res.partner', string='PartOwner', change_default=True, track_visibility='onchange')
 
-    partowner_ids = fields.One2many('block.partowner', 'block_id', string='Part Owners', track_visibility='onchange')
-#    partowner_names = fields.Char('Partowners',compute='_partowner_names',store=True,)
-    partowner_names = fields.Char('Partowners',compute='_partowner_names',store=True,  track_visibility='onchange')
-    
+    partowner_ids = fields.One2many('block.partowner', 'block_id', string='Part Owners',)
+    partowner_names = fields.Char('Partowners',compute='_partowner_names',store=True,  track_visibility='always')
+    #  change convert_for_display in mail_thread.py to get a better display of a One2many-change-log
     meeting_ids =  fields.Many2many('calendar.event', relation="rel_blocks_calendar",string='Board meeting')
 
 
