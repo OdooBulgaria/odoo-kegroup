@@ -138,6 +138,7 @@ page-break{
     }
 								<h1 class="page-break">Schedule 1</h1>
 
+					<br/>
 								<br/>
 Details of Ordinary Shares to be sold<br/>
 Number of shares in <span t-field="o.company_id.name" /><br/>

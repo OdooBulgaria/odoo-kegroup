@@ -277,6 +277,7 @@
             
                  <div class="page">
                              
+                             
                              <table class="ctable" style="width:100%;border-style:none !important;margin-top:30px;margin-bottom:30px; "> 
                                  <thead>
                                  <tr style="margin-bottom:20px !important;"> 
@@ -309,9 +310,16 @@
                                                                                                   
 <!--                                <tr t-foreach="o.block_ids.sorted(key=lambda b: b.name)" t-as="b" style="line-height: 14px;">  -->
                                 <t t-foreach="o.block_ids.sorted(key=lambda b: b.name)" t-as="b">  
+                                    
+                                    
+                                <t t-set="state_style" t-value="''" />
+                                <t t-if="b.state == 'cancel'">
+                                    <t t-set="state_style" t-value="'text-decoration: line-through;'" />
+                                </t>
+                                    
                              <table class="ctable" style="width:100%;border-style:none !important;margin-top:30px;margin-bottom:30px; "> 
 									<tr  style="line-height: 14px;"> 
-                                 <td style="min-width:100px;max-width:100px;" class="text-left"><span t-field="b.owner_id.name"/> <t t-if="b.owner_id.ss_number">(<span t-esc="b.owner_id.ss_number"/>)</t>. <span t-field="b.owner_id.contact_address"/>
+                                 <td t-attf-style="min-width:100px;max-width:100px;{{ state_style }}" class="text-left"><span t-field="b.owner_id.name"/> <t t-if="b.owner_id.ss_number">(<span t-esc="b.owner_id.ss_number"/>)</t>. <span t-field="b.owner_id.contact_address"/>
                                     <t t-if="b.policy_number"><BR/>Policy no. (<span t-field="b.policy_number"/> <span t-field="b.beneficiary.name"/>)</t>
 <!--                                    <td style="min-width:130px;max-width:130px;" class="text-left"><span t-field="b.owner_id.name"/> <t t-if="b.owner_id.ss_number">(<span t-esc="b.owner_id.ss_number"/>)</t> <BR/>-->
 <!--									<span t-esc="b.owner_id.street"/><t t-if="b.owner_id.street2">, <span t-esc="b.owner_id.street2"/> </t><BR/>-->

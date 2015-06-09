@@ -49,6 +49,7 @@ KE-Group
 #        'report/report_block.xml',
         'report/blocks_report_standard.xml',
         'report/blocks_report_extended.xml',
+        'report/blocks_report_extended2.xml',
         'report/share_purchase_agreement.xml',
         ],
     'installable': True,

@@ -28,74 +28,83 @@
 
 <template id="share_register.blocks_report_extended_document_body" name="Certificate report extended body">
     <t t-foreach="blocks" t-as="b">
-        <table class="ctable" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:10px;"> 
+        <t t-set="state_style" t-value="''" />
+        <t t-if="b.state == 'cancel'">
+            <t t-set="state_style" t-value="'text-decoration: line-through;'" />
+        </t>
+        
+<!--
+        <t t-set="state_style" t-value="'width:100%;border-style:none !important;margin-top:10px;margin-bottom:10px;text-decoration: line-through;'" t-if="b-state == 'cancel'" />
+-->
+        
+        <table class="ctable" t-attf-style="'width:100%;border-style:none !important;margin-top:10px;margin-bottom:10px; {{ state_style }}'"> 
 
-        <tr><td style="min-width:100px;max-width:100px;"><b>Owner: </b></td>
-        <td style="min-width:300px;max-width:300px;"><span t-esc="b.owner_id.name"/> </td>
-        <td style="min-width:101px;max-width:101px;"><b>Cert.No: </b></td>
-        <td style="min-width:102px;max-width:102px;"><span t-esc="b.name"/></td>			
-        <td style="min-width:103px;max-width:103px;"><b>State: </b></td>
-        <td style="min-width:104px;max-width:104px;"> <span t-esc="b.state"/> </td>		</tr>
+        <tr><td t-attf-style="min-width:100px;max-width:100px; {{ state_style }}"><b>Owner: </b></td>
+        <td t-attf-style="min-width:300px;max-width:300px;{{ state_style }}"><span t-esc="b.owner_id.name"/> </td>
+        <td t-attf-style="min-width:101px;max-width:101px;{{ state_style }}"><b>Cert.No: </b></td>
+        <td t-attf-style="min-width:102px;max-width:102px;{{ state_style }}"><span t-esc="b.name"/></td>			
+        <td t-attf-style="min-width:103px;max-width:103px;{{ state_style }}"><b>State: </b></td>
+        <td t-attf-style="min-width:104px;max-width:104px;{{ state_style }}"> <span t-esc="b.state"/> </td>		</tr>
 
-        <tr><td style="min-width:100px;max-width:100px;"><b>Date of Birth: </b></td>
-        <td style="min-width:300px;max-width:300px;"><span t-esc="b.owner_id.birthdate"/><t t-if="b.owner_id.ss_number">(<span t-esc="b.owner_id.ss_number"/>)</t></td> 		
-        <td style="min-width:151px;max-width:151px;"><b>Issued Date: </b></td>
-        <td style="min-width:102px;max-width:100px;"><span t-esc="b.date_issued"/></td>
-        <td style="min-width:153px;max-width:153px;"><b>Share Class:</b></td>
-        <td style="min-width:104px;max-width:100px;"><span t-esc="b.share_class"/></td>	</tr>
+        <tr><td t-attf-style="min-width:100px;max-width:100px; {{ state_style }}"><b>Date of Birth: </b></td>
+        <td t-attf-style="min-width:300px;max-width:300px; {{ state_style }}"><span t-esc="b.owner_id.birthdate"/><t t-if="b.owner_id.ss_number">(<span t-esc="b.owner_id.ss_number"/>)</t></td> 		
+        <td t-attf-style="min-width:151px;max-width:151px; {{ state_style }}"><b>Issued Date: </b></td>
+        <td t-attf-style="min-width:102px;max-width:100px; {{ state_style }}"><span t-esc="b.date_issued"/></td>
+        <td t-attf-style="min-width:153px;max-width:153px; {{ state_style }}"><b>Share Class:</b></td>
+        <td t-attf-style="min-width:104px;max-width:100px; {{ state_style }}"><span t-esc="b.share_class"/></td>	</tr>
 
-	    <tr><td style="min-width:130px;max-width:100px;"><b>Street: </b></td>
-	    <td style="min-width:300px;max-width:300px;"><span t-esc="b.owner_id.street"/><t t-if="b.owner_id.street2">, <span t-esc="b.owner_id.street2"/> </t></td> 
-        <td style="min-width:151px;max-width:151px;"><b>Shares on Cert: </b></td>
-        <td style="min-width:102px;max-width:100px;"><span t-esc="b.number_of_shares"/></td>	
-        <td style="min-width:153px;max-width:153px;"><b>Emption: </b></td>
-        <td style="min-width:104px;max-width:100px;"><span t-esc="b.emption"/></td>		</tr>
+	    <tr><td t-attf-style="min-width:130px;max-width:100px; {{ state_style }}"><b>Street: </b></td>
+	    <td t-attf-style="min-width:300px;max-width:300px; {{ state_style }}"><span t-esc="b.owner_id.street"/><t t-if="b.owner_id.street2">, <span t-esc="b.owner_id.street2"/> </t></td> 
+        <td t-attf-style="min-width:151px;max-width:151px; {{ state_style }}"><b>Shares on Cert: </b></td>
+        <td t-attf-style="min-width:102px;max-width:100px; {{ state_style }}"><span t-esc="b.number_of_shares"/></td>	
+        <td t-attf-style="min-width:153px;max-width:153px; {{ state_style }}"><b>Emption: </b></td>
+        <td t-attf-style="min-width:104px;max-width:100px; {{ state_style }}"><span t-esc="b.emption"/></td>		</tr>
 
-        <tr><td style="min-width:100px;max-width:100px;"><b>Address: </b></td>
-        <td style="min-width:300px;max-width:300px;"><span t-esc="b.owner_id.zip"/> <span t-esc="b.owner_id.city"/>, <span t-esc="b.owner_id.country_id.code"/>. </td>
-        <td style="min-width:151px;max-width:151px;"><b>Price:</b></td>
-        <td style="min-width:102px;max-width:100px;"><span t-esc="b.purchase_price"/></td>
-        <td style="min-width:102px;max-width:100px;"><b>Cert Issued: </b></td>
-        <td style="min-width:153px;max-width:153px;"><span t-esc="b.certificate_issued"/></td>	</tr>
+        <tr><td t-attf-style="min-width:100px;max-width:100px; {{ state_style }}"><b>Address: </b></td>
+        <td t-attf-style="min-width:300px;max-width:300px; {{ state_style }}"><span t-esc="b.owner_id.zip"/> <span t-esc="b.owner_id.city"/>, <span t-esc="b.owner_id.country_id.code"/>. </td>
+        <td t-attf-style="min-width:151px;max-width:151px; {{ state_style }}"><b>Price:</b></td>
+        <td t-attf-style="min-width:102px;max-width:100px; {{ state_style }}"><span t-esc="b.purchase_price"/></td>
+        <td t-attf-style="min-width:102px;max-width:100px; {{ state_style }}"><b>Cert Issued: </b></td>
+        <td t-attf-style="min-width:153px;max-width:153px; {{ state_style }}"><span t-esc="b.certificate_issued"/></td>	</tr>
 
-	    <tr><td style="min-width:100px;max-width:100px;"><b>Phone: </b></td>
-	    <td style="min-width:300px;max-width:300px;"><t t-if="b.owner_id.phone"> T:<span t-esc="b.owner_id.phone"/></t> <t t-if="b.owner_id.mobile">M:<span t-esc="b.owner_id.mobile"/></t></td>
-        <td style="min-width:151px;max-width:151px;"><t t-if="b.cancelled_date"><b>Cancelled date: </b></t></td>
-        <td style="min-width:102px;max-width:100px;"><span t-esc="b.cancelled_date"/></td>
-        <td style="min-width:153px;max-width:153px;"><t t-if="b.new_cert_number"><b>New Cert. No.:</b> </t></td>
-        <td style="min-width:104px;max-width:100px;"><span t-esc="b.new_cert_number"/></td>	</tr>
+	    <tr><td t-attf-style="min-width:100px;max-width:100px; {{ state_style }}"><b>Phone: </b></td>
+	    <td t-attf-style="min-width:300px;max-width:300px; {{ state_style }}"><t t-if="b.owner_id.phone"> T:<span t-esc="b.owner_id.phone"/></t> <t t-if="b.owner_id.mobile">M:<span t-esc="b.owner_id.mobile"/></t></td>
+        <td t-attf-style="min-width:151px;max-width:151px; {{ state_style }}"><t t-if="b.cancelled_date"><b>Cancelled date: </b></t></td>
+        <td t-attf-style="min-width:102px;max-width:100px; {{ state_style }}"><span t-esc="b.cancelled_date"/></td>
+        <td t-attf-style="min-width:153px;max-width:153px; {{ state_style }}"><t t-if="b.new_cert_number"><b>New Cert. No.:</b> </t></td>
+        <td t-attf-style="min-width:104px;max-width:100px; {{ state_style }}"><span t-esc="b.new_cert_number"/></td>	</tr>
 
-	    <tr><td style="min-width:100px;max-width:100px;"><b>Email: </b></td>
-	    <td style="min-width:300px;max-width:300px;"><span t-esc="b.owner_id.email"/></td>
-        <td style="min-width:151px;max-width:151px;"><t t-if="b.numbers_sold"><b>Numbers sold: </b></t></td>
-        <td style="min-width:102px;max-width:100px;"><t t-if="b.numbers_sold"><span t-esc="b.numbers_sold"/></t></td>		
-        <td style="min-width:153px;max-width:153px;"><t t-if="b.numbers_sold"><b>New Balance: </b></t></td>
-        <td style="min-width:104px;max-width:100px;"><t t-if="b.numbers_sold"><span t-esc="b.new_balance"/></t></td></tr>
+	    <tr><td t-attf-style="min-width:100px;max-width:100px; {{ state_style }}"><b>Email: </b></td>
+	    <td t-attf-style="min-width:300px;max-width:300px; {{ state_style }}"><span t-esc="b.owner_id.email"/></td>
+        <td t-attf-style="min-width:151px;max-width:151px; {{ state_style }}"><t t-if="b.numbers_sold"><b>Numbers sold: </b></t></td>
+        <td t-attf-style="min-width:102px;max-width:100px; {{ state_style }}"><t t-if="b.numbers_sold"><span t-esc="b.numbers_sold"/></t></td>		
+        <td t-attf-style="min-width:153px;max-width:153px; {{ state_style }}"><t t-if="b.numbers_sold"><b>New Balance: </b></t></td>
+        <td t-attf-style="min-width:104px;max-width:100px; {{ state_style }}"><t t-if="b.numbers_sold"><span t-esc="b.new_balance"/></t></td></tr>
 
 <t t-if="b.beneficiary.name">
-        <tr><td style="min-width:100px;max-width:100px;"><b>Beneficiary: </b></td>
-        <td style="min-width:300px;max-width:300px;"><span t-esc="b.beneficiary.name"/>  (<span t-esc="b.beneficiary.ss_number"/>)</td> 
-        <td style="min-width:151px;max-width:151px;"></td>
-        <td style="min-width:102px;max-width:100px;"></td>
-        <td style="min-width:153px;max-width:153px;"></td>
-        <td style="min-width:104px;max-width:100px;"></td></tr>
+        <tr><td t-attf-style="min-width:100px;max-width:100px; {{ state_style }}"><b>Beneficiary: </b></td>
+        <td t-attf-style="min-width:300px;max-width:300px; {{ state_style }}"><span t-esc="b.beneficiary.name"/>  (<span t-esc="b.beneficiary.ss_number"/>)</td> 
+        <td t-attf-style="min-width:151px;max-width:151px; {{ state_style }}"></td>
+        <td t-attf-style="min-width:102px;max-width:100px; {{ state_style }}"></td>
+        <td t-attf-style="min-width:153px;max-width:153px; {{ state_style }}"></td>
+        <td t-attf-style="min-width:104px;max-width:100px; {{ state_style }}"></td></tr>
 </t>
        	<t t-foreach="b.partowner_ids" t-as="p">  
-        <tr><td style="min-width:350px;max-width:500px;" colspan="3"><b>Partowner: </b><span t-esc="p.partowner_id.name"/> (<span t-esc="p.partowner_id.ss_number"/>), <span t-esc="p.partowner_id.contact_address"/></td>
-	        <td style="min-width:151px;max-width:251px;"><t t-if="p.partowner_id.phone"> T:<span t-esc="p.partowner_id.phone"/></t> <t t-if="p.partowner_id.mobile">M:<span t-esc="p.partowner_id.mobile"/></t></td> 		
-	        <td style="min-width:152px;max-width:202px;"><span t-esc="p.partowner_id.email"/></td>
-	        <td style="min-width:103px;max-width:103px;"><span t-esc="p.partowner_percent"/>% (<span t-esc="p.purchase_price"/>). <span t-esc="p.purchase_date"/> </td>
+        <tr><td t-attf-style="min-width:350px;max-width:500px; {{ state_style }}" colspan="3"><b>Partowner: </b><span t-esc="p.partowner_id.name"/> (<span t-esc="p.partowner_id.ss_number"/>), <span t-esc="p.partowner_id.contact_address"/></td>
+	        <td t-attf-style="min-width:151px;max-width:251px; {{ state_style }}"><t t-if="p.partowner_id.phone"> T:<span t-esc="p.partowner_id.phone"/></t> <t t-if="p.partowner_id.mobile">M:<span t-esc="p.partowner_id.mobile"/></t></td> 		
+	        <td t-attf-style="min-width:152px;max-width:202px; {{ state_style }}"><span t-esc="p.partowner_id.email"/></td>
+	        <td t-attf-style="min-width:103px;max-width:103px; {{ state_style }}"><span t-esc="p.partowner_percent"/>% (<span t-esc="p.purchase_price"/>). <span t-esc="p.purchase_date"/> </td>
 			</tr>
 		</t>
 
        	<t t-foreach="b.stakeholder" t-as="s">  
-        <tr><td style="min-width:350px;max-width:600px;" colspan="3"><b>Stakeholder: </b><span t-esc="s.name"/> (<span t-esc="s.ss_number"/>), <span t-esc="s.contact_address"/></td>
-	        <td style="min-width:101px;max-width:101px;"><t t-if="s.phone"> T:<span t-esc="s.phone"/></t> <t t-if="s.mobile">M:<span t-esc="s.mobile"/></t></td> 		
-	        <td style="min-width:202px;max-width:202px;" colspan="2"><span t-esc="s.email"/></td>
+        <tr><td t-attf-style="min-width:350px;max-width:600px; {{ state_style }}" colspan="3"><b>Stakeholder: </b><span t-esc="s.name"/> (<span t-esc="s.ss_number"/>), <span t-esc="s.contact_address"/></td>
+	        <td t-attf-style="min-width:101px;max-width:101px; {{ state_style }}"><t t-if="s.phone"> T:<span t-esc="s.phone"/></t> <t t-if="s.mobile">M:<span t-esc="s.mobile"/></t></td> 		
+	        <td t-attf-style="min-width:202px;max-width:202px; {{ state_style }}" colspan="2"><span t-esc="s.email"/></td>
 			</tr>
 		</t>
 
-		<tr><td style="min-width:50px;max-width:50px;"><strong>Comment:</strong></td>
+		<tr><td t-attf-style="min-width:50px;max-width:50px; {{ state_style }}"><strong>Comment:</strong></td>
 			<td colspan="10"><t t-if="b.comment"><span t-field="b.comment"/></t></td>
 			</tr>
 
@@ -108,6 +117,8 @@
 <!--		</td></tr>-->
 
 	</table>
+    
+
 	<hr/>
 </t>
 </template>
