@@ -145,14 +145,13 @@ class block_partowner(models.Model):
     _description = "Partowners of shares"
     _order = "name desc, id desc"
 
-    block_id = fields.Many2one('share.block', string='Certificate', change_default=True,required=True, readonly=False,track_visibility='always')
+    block_id = fields.Many2one('share.block', string='Certificate', change_default=True, required=True, readonly=False, track_visibility='always')
     name = fields.Char(string='Part Owner No.', index=True,readonly=False,)
     partowner_id = fields.Many2one('res.partner', string='Part Owner', change_default=True, required=True, readonly=False,track_visibility='always')
     partowner_percent = fields.Float('Owner percent', digits_compute=dp.get_precision('Account'))
     purchase_price = fields.Float('Purchase price', digits_compute=dp.get_precision('Account'))    
     purchase_date = fields.Date('Purchase Date',)
-    
-
+    block_state = fields.Selection(string='State', related='block_id.state')
 
 class share_block(models.Model):
     _name = "share.block"

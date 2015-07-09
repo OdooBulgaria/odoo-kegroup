@@ -29,7 +29,8 @@
                                 <field name="block_id"/>
                                 <field name="partowner_percent"/>
                                 <field name="purchase_date"/>
-                                <field name="purchase_price"/>                                 
+                                <field name="purchase_price"/>
+                                <field name="block_state"/>
                                 </tree>
                            </field>
                         </page>
